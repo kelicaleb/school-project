@@ -2,7 +2,7 @@
   "name": "caleb",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://github.com/kelicaleb/caleb.git",
+  "homepage": "https://kelicaleb.github.io/caleb/",
   "type": "module",
   "scripts": {
     "predeploy" : "npm run build",
