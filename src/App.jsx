@@ -11,7 +11,7 @@ function App() {
   return (
     <>
     <div className=" w-screen">
-      <BrowserRouter>
+      <BrowserRouter basename="/school-project">
         <Routes>
           <Route index path="school-project/" element={<Home/>}/>
           <Route  path="school-project/Home" element={<Home/>}/>
