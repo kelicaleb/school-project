@@ -14,7 +14,6 @@ function App() {
       <BrowserRouter>
         <Routes basename="/school-project">
           <Route index path="school-project/" element={<Home/>}/>
-          <Route  path="school-project/home" element={<Home/>}/>
           <Route path="school-project/Product" element={<Product/>}/>
           <Route path="school-project/Cart" element={<Cart/>}/>
         </Routes>
