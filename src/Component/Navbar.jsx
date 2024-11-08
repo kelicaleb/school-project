@@ -42,7 +42,7 @@ function Navbar()
         <div className="hidden sm:ml-6 sm:block top-0 left-0 right-0">
           <div className="flex space-x-4">
             <a className="rounded-md px-3 py-2  font-bold text-white font-serif text-1xl bg-cyan-600 tracking-[.12em]" aria-current="page">BLOO</a>
-            <a href="home" className=" rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+            <a href="Home" className=" rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
             <a href="Product" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Products</a>
             <a href="Cart" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Cart</a>
           </div>
@@ -57,7 +57,7 @@ function Navbar()
           </svg>
         </button>
 
-        <div className="relative ml-3 pr-20">
+        <div className="relative ml-3 pr-12">
           <div>
             <button onClick={handleMenuButton} className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 " id="user-menu-button" aria-expanded="false" aria-haspopup="true">
               <span className="absolute -inset-1.5"></span>

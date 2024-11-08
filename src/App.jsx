@@ -11,7 +11,6 @@ function App() {
   return (
     <>
     <div className=" w-screen">
-    <React.StrictMode>
       <BrowserRouter>
         <Routes>
           <Route index path="school-project/" element={<Home/>}/>
@@ -20,7 +19,6 @@ function App() {
           <Route path="school-project/Cart" element={<Cart/>}/>
         </Routes>
       </BrowserRouter>
-      </React.StrictMode>
     </div>
     </>
   )
