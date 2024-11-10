@@ -41,12 +41,10 @@ function Product()
     return(
         <>
             <Navbar/> 
-            <div id="Product" >
-                <div className="fixed flex items-center justify-center pl-[34rem]">
-                 <input className="rounded-full text-center border border-cyan-600 font-serif"type="text" placeholder="Search" value={search} onChange={e => handleSearch(e.target.value)}/>
-                </div>
-            </div> 
-            <div className="grid grid-cols-3 pt-12">
+            <div className="relative flex items-center justify-center pr-2 pt-12">
+                 <input className=" w-60 rounded-lg text-center border border-cyan-600  font-serif font-bold"type="text" placeholder="Search...." value={search} onChange={e => handleSearch(e.target.value)}/>
+            </div>
+            <div className="grid grid-cols-3 pt-16">
                 {
                     
                         control && data.map(users => 
@@ -67,7 +65,7 @@ function Product()
                  
                 }
             </div>
-            <div className="grid grid-cols-3 pt-12">
+            <div className="grid grid-cols-3 pt-2z">
                 {
                      !control && searched.map(users => 
                         <>
