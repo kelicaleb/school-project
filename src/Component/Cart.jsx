@@ -1,15 +1,22 @@
-import React from 'react'
+import React, {useEffect}from 'react'
 import Navbar from './Navbar'
 
 
 
-function Cart()
+function Cart({data})
 {
+   
     return(
         <>
             <Navbar/>
             <div id="Cart" className="h-screen w-screen relative flex items-center justify-center">
-        <       h1 className="text-center relative items-center justify-center">This is the cart page </h1>
+                {
+                    data.map(users => 
+                        <ul key={users.id}>
+                            <li>{users.title}</li>
+                        </ul>
+                    )
+                }
             </div>
         </>
     )

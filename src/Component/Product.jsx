@@ -1,16 +1,94 @@
-import React from 'react'
+import React, {useState, useEffect } from 'react'
 import Navbar from './Navbar'
-
-
+import axios from 'axios'
+import Cart from "./Cart"
+import { useNavigate } from 'react-router-dom'
 
 function Product()
 {
+    const [data, setData ] = useState([])
+    const [search, setSearch ] = useState([])
+    const [searched, setSearched ] = useState([])
+    const [control, setControl ] = useState(true)
+    const [cart, setCart ] = useState([])
+    const [notrender, setRender ]= useState(false)
+    const navigate = useNavigate()
+    useEffect(() => 
+    {
+        axios.get("https://fakestoreapi.com/products")
+        .then((res) => setData(res.data))
+        const results = data.filter((data) => {
+            return data && data.title && data.title.toLowerCase().includes(search)
+        })
+        setSearched(results)
+    }, [search], [cart])
+    const handleCart = (users) => 
+    {
+        setCart([...cart,{
+            id:users.id, 
+            title: users.title, 
+            description: users.description, 
+            category:users.category,
+            image: users.image, 
+            rating: users.rating
+        }])
+    }
+    const handleSearch = (e) => 
+    {
+        setSearch(e)
+        setControl(false)
+    }
     return(
-        <> 
-            <Navbar/>  
-            <div  id="Product" className="h-screen w-screen relative flex items-center justify-center">
-                <h1>This is the product page</h1>
-            </div>  
+        <>
+            <Navbar/> 
+            <div id="Product" >
+                <div className="fixed flex items-center justify-center pl-[34rem]">
+                 <input className="rounded-full text-center border border-cyan-600 font-serif"type="text" placeholder="Search" value={search} onChange={e => handleSearch(e.target.value)}/>
+                </div>
+            </div> 
+            <div className="grid grid-cols-3 pt-12">
+                {
+                    
+                        control && data.map(users => 
+                             <>
+                             
+                               <div className="grid grid-cols-2">
+                               <div className="pt-8"key={users.id}>
+                                      <img  className="h-24 w-24" src={users.image} key={users.id}/>
+                                      <p className="font-serif text-sm">{users.title}</p>
+                                     <div className="pt-2 left-0 right-0">
+                                         <button onClick={() => handleCart(users)} className="font-serif border border-cyan-600 hover:bg-cyan-600 hover:text-white w-24 h-10 rounded-lg">Add Cart</button>
+                                     </div>
+                                 </div>
+                               </div>
+                             
+                             </>
+                         )
+                 
+                }
+            </div>
+            <div className="grid grid-cols-3 pt-12">
+                {
+                     !control && searched.map(users => 
+                        <>
+                            <div className=" grid grid-cols-2">
+                                <div className="pt-8" key={users.id}>
+                                     <img  className="h-24 w-24" src={users.image} key={users.id}/>
+                                   <div className="pt-2">
+                                   <p className="font-serif text-sm">{users.title}</p>
+                                   </div>
+                                     <div className="pt-2 left-0 right-0">
+                                        <button onClick={() => handleClick(users)} className="font-serif border border-cyan-600 hover:bg-cyan-600 hover:text-white w-24 h-10 rounded-lg">Add Cart</button>
+                                     </div>
+                                    </div>
+                                </div>
+                        </>
+                    )
+                }
+            </div>
+            <div>
+                <Cart data={cart}/>
+            </div>
         </>
     )
 }
