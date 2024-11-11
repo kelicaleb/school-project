@@ -8,6 +8,8 @@ import Product from "./Component/Product"
 import Cart from "./Component/Cart"
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 function App() {
+  let component; 
+
   return (
     <>
     <div className=" w-screen">
@@ -16,9 +18,10 @@ function App() {
           <Route index path="school-project/" element={<Home/>}/>
           <Route  path="school-project/schoolHome" element={<Home/>}/>
           <Route path="school-project/schoolProducts" element={<Product/>}/>
-          <Route path="school-project/schoolCart" element={<Cart/>}/>
+          <Route path="school-project/schoolHome/Cart" element={<Cart/>}/>
         </Routes>
       </BrowserRouter>
+      {component}
     </div>
     </>
   )
