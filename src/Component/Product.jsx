@@ -74,17 +74,15 @@ function Product()
                 {
                      !control && searched.map(users => 
                         <>
-                            <div className=" grid grid-cols-2 ">
-                                <div className="pt-8 " key={users.id}>
-                                     <img  className="h-24 w-24" src={users.image} key={users.id}/>
-                                   <div className="pt-2">
-                                   <p className="font-serif text-sm">{users.title}</p>
-                                   </div>
+                             <div className="grid grid-cols-2 shadow-xl shadow-cyan-600 pl-24 h-96 w-80  hover:shadow-cyan-400">
+                               <div className="pt-12 pl-2" key={users.id}>
+                                <img  className="h-24 w-24 " src={users.image} key={users.id}/>
+                                      <p className="font-serif text-sm">{users.title}</p>
                                      <div className="pt-2 left-0 right-0">
-                                        <button onClick={() => handleClick(users)} className="font-serif border border-cyan-600 hover:bg-cyan-600 hover:text-white w-24 h-10 rounded-lg">Add Cart</button>
+                                         <button onClick={() => handleCart(users)} className="font-serif border border-cyan-600 hover:bg-cyan-600 hover:text-white w-24 h-10 rounded-lg">Add Cart</button>
                                      </div>
-                                    </div>
-                                </div>
+                                 </div>
+                               </div>
                         </>
                     )
                 }
