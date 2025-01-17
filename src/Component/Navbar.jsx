@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Link }from 'react-router-dom'
 
 function Navbar()
 {
@@ -10,6 +9,7 @@ function Navbar()
        
         setMenu(!menu)
     }
+   
  
   
    return(
@@ -44,7 +44,7 @@ function Navbar()
             <a className="rounded-md px-3 py-2  font-bold text-white font-serif text-1xl bg-cyan-600 tracking-[.12em]" aria-current="page">BLOO</a>
             <a href="schoolHome" className=" rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
             <a href="schoolProducts" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Products</a>
-            <a href="#Cart" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Cart</a>
+            <a href="schoolCart" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Cart</a>
           </div>
         </div>
       </div>
