@@ -21,7 +21,7 @@ function Product()
         })
         setSearched(results)
     }, [search], [cart])
-    const handleCart = (users) => 
+    const handleCart = async(users) => 
     {
         setCart([...cart,{
             id:users.id, 
@@ -31,6 +31,17 @@ function Product()
             image: users.image, 
             rating: users.rating
         }])
+       await  axios.post("http://localhost:8000/cart", 
+            {
+                title:users.title, 
+                price:users.price,
+                formed:users.description, 
+                category:users.category, 
+                image:users.image
+            }
+        )
+        console.log(users.description)
+        
     }
     const handleSearch = (e) => 
     {
