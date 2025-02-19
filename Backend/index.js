@@ -2,7 +2,10 @@ import express from 'express'
 import dotenv from 'dotenv'
 import mysql2 from 'mysql2'
 import cors from 'cors'
-
+import Purchase from './Queries/purchase.js'
+import Transaction from './Queries/transaction.js'
+import bcrypt from 'bcrypt'
+import Customer from './Queries/Customer.js'
 
 dotenv.config()
 const port = process.env.PORT
@@ -11,12 +14,19 @@ const app = express()
 app.use(cors())
 app.use( express.json())
 app.use(express.urlencoded({extended: true}))
+const purchases = Purchase()
+app.use("/purchase", purchases)
+const transaction = Transaction() 
+app.use("/transaction", transaction)
+const customer = Customer()
+app.use("/customer", customer)
+
 
 const db = mysql2.createConnection({
     host:"localhost", 
     user:"root",
-    password:"root",
-    database:"test"
+    password:"password",
+    database:"Products"
 })
 
 
@@ -43,6 +53,20 @@ app.post("/cart", (req, res) =>
         }
     })
 
+})
+app.get("/carts", (req, res) => 
+{
+    const selects = `SELECT * FROM Cart;`
+    db.query(selects, (err, result) => 
+    {
+        if(err){
+            console.log("There is an error ", err)
+           return res.status(400).json({mesage: err})
+        }
+        else{
+            return res.status(200).json(result)
+        }
+    })
 })
 
 app.get("/products", (req, res) => 
@@ -75,6 +99,21 @@ app.delete("/delete/:id", (req, res) =>
         }
     })
 })
+
+const password = "Password"
+
+const salt =  await bcrypt.genSalt(10)
+
+const hash = await bcrypt.hash(password, salt)
+
+const isMatch = await bcrypt.compare('Password', hash)
+console.log(isMatch)
+
+
+
+
+
+
 
 
 app.listen(port, ()=> 
