@@ -4,6 +4,8 @@ import axios from 'axios'
 import { BsCart4 } from "react-icons/bs";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 
 function Product()
@@ -15,15 +17,30 @@ function Product()
     const [cart, setCart ] = useState([])
     const [amount, setAmount]  = useState(0)
     const [notification, setNotification] = useState(false)
+    const[loading, setLoading] = useState(true)
+    const [mode, setMode]= useState("light")
     
     useEffect(() => 
     {
-        axios.get("https://fakestoreapi.com/products")
-        .then((res) => setData(res.data))
-        const results = data.filter((data) => {
-            return data && data.title && data.title.toLowerCase().includes(search)
-        })
-        setSearched(results)
+        console.log(mode)
+      const fetchData = async ()=> 
+      {
+        try{
+            setLoading(false)
+            await axios.get("https://fakestoreapi.com/products")
+            .then((res) => setData(res.data))
+            const results = data.filter((data) => {
+                return data && data.title && data.title.toLowerCase().includes(search)
+            })
+            setSearched(results)
+           }
+           catch{
+            console.log("Error fetching data")
+            setLoading(true)
+           }
+         
+      }
+      fetchData()
     }, [search], [cart])
     const handleCart = async(users) => 
     {
@@ -41,6 +58,7 @@ function Product()
         })
         .catch((error) => {
             toast.error("Failed to add to Cart");
+            return console.log("Error has occured",error)
         })      
 
         
@@ -51,10 +69,12 @@ function Product()
         setControl(false)
     }
   
+  
    
     return(
         <>
-            <h1 className="box-decoration-slice  underline text-center text-cyan-600 text-5xl pt-12 pr-40 font-serif font-bold">Products </h1>
+           <div className={mode}>
+           <h1 className=" dark:text-violet-600 box-decoration-slice  underline text-center text-cyan-600  text-5xl pt-12 pr-40 font-serif font-bold">Products </h1>
             <Navbar/> 
             <ToastContainer />
             <div className="flex items-center justify-center pl-96 pt-12 pb-12 ">
@@ -65,13 +85,19 @@ function Product()
                  <a href="schoolCart" className='font-serif font-semibold text-cyan-600 hover:text-cyan-400 '> Cart</a>
 
             </div>
-            <div className="grid grid-cols-3 ">
+            {
+                                 loading && 
+                                <div className="sweet-loading relative flex items-center justify-center pt-32 text-cyan-600">
+                                    <ClipLoader/>
+                                </div>  
+                                }
+            <div className="grid grid-cols-3 max-h-screen">
                 {
                     
                         control && data.map(users => 
                              <>
                              
-                               <div className="grid grid-cols-2 shadow-xl shadow-cyan-600 pl-24 pb-4 w-80  hover:shadow-cyan-400 hover:-translate-y-1">
+                               <div className="grid grid-cols-2 shadow-xl shadow-cyan-600 pl-24 pb-4 w-80  hover:shadow-cyan-400 hover:-translate-y-1 ">
                                <div className="pt-12 pl-2" key={users.id}>
                                 <img  className="h-24 w-24 " src={users.image}/>
                                       <p className="font-serif text-sm">{users.title}</p>
@@ -110,6 +136,7 @@ function Product()
                     )
                 }
             </div>
+           </div>
           
         </>
     )

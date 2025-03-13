@@ -60,6 +60,7 @@ const Transaction = () =>
             return res.status(500).json({message: "Error connecting to transaction"})
         }
     })
+  
     transaction.post("/post", async(req, res) => 
     {
         try{
@@ -77,6 +78,8 @@ const Transaction = () =>
             console.log(" Error posting to transaction")
             return res.status(500).json({message: "Error posting to transaction"})
         }
+
+
     })
     transaction.delete("/deletes/:id", async (req, res) => 
     {

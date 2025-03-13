@@ -6,6 +6,7 @@ import Purchase from './Queries/purchase.js'
 import Transaction from './Queries/transaction.js'
 import bcrypt from 'bcrypt'
 import Customer from './Queries/Customer.js'
+import Login from './Queries/Login.js'
 
 dotenv.config()
 const port = process.env.PORT
@@ -20,6 +21,8 @@ const transaction = Transaction()
 app.use("/transaction", transaction)
 const customer = Customer()
 app.use("/customer", customer)
+const login = Login()
+app.use("/Logins", login)
 
 
 const db = mysql2.createConnection({
@@ -110,13 +113,7 @@ const isMatch = await bcrypt.compare('Password', hash)
 console.log(isMatch)
 
 
-
-
-
-
-
-
 app.listen(port, ()=> 
 {
-    console.log(`Server is running on ${port}`)
+    console.log(`Server is running on  port ${port}`)
 })

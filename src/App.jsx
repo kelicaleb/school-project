@@ -11,12 +11,13 @@ import Login from './Component/Login';
 import Register from './Component/Register'
 function App() {
   const [logging, setLogging] = useState(false)
+  const[dark, setDark ] = useState("dark")
   return (
     <>
     <div className=" w-screen">
       <BrowserRouter>
         <Routes basename="/school-project">
-          <Route index path="school-project/" element={<Home/>}/>
+          <Route index path="school-project/" element={<Login/>}/>
           <Route path="school-project/schoolHome" element={<Home/>}/>
           <Route path="school-project/schoolProducts" element={<Product/>}/>
           <Route path="school-project/schoolCart" element={<Cart/>}/>

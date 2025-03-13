@@ -85,32 +85,33 @@ customer.post("/posts",async (req, res) =>
     }
 })
 customer.post("/login", async(req, res) => 
-{
+{   
     const {username, password} = req.body
     try{
-       const check = await Customers.findOne({username})
-        console.log("this is check",check)
-       if(check)
-       {
-        console.log("user has been found")
-       }
-       console.log(check.password)
+        const check = await Customers.findOne({
+            where:
+            {
+                username
+            }
+        })
+        console.log("this is check",check.username)
+  
        const isMatching = await bcrypt.compare(password, check.password)
        console.log(isMatching)
-       if(isMatching)
+       if(isMatching && username === check.username)
        {
-        console.log("Password matches")
-        
+        console.log("Logged in successfully")
         return res.status(200).json({logging: true})
        }
        else{ 
-        console.log("Password is not matching")
+        console.log("Password or username is not matching")
+        return res.status(400).json({logging: false})
        }
      
  }
     catch{
         console.log("Error authenticating")
-        return res.status(500).json({message:"Error authenticating"})
+        return res.status(500).json({logging:false})
     }
 })
 

@@ -39,9 +39,6 @@ function Register()
     },[tick, count])
 
 
-
-
-
     const handleGender = (e) => 
     {
         setGender(e)
@@ -55,6 +52,12 @@ function Register()
                 username:username, 
                 password:password, 
                 dob:dob, 
+                gender:gender
+            }
+        )
+        .then((res) => console.log(res))
+        axios.post("http://localhost:8000/Logins/posts", 
+            {
                 gender:gender
             }
         )

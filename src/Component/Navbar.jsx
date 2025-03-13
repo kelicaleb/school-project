@@ -1,20 +1,78 @@
 import React, { useState, useEffect } from 'react'
+import { FaOpencart } from "react-icons/fa";
+import { FaSmile } from "react-icons/fa";
+import axios from 'axios'
+import { MdSunny } from "react-icons/md";
+import { FaMoon } from "react-icons/fa";
+
 
 function Navbar()
 {
     const [menu, setMenu ] = useState(false)
-   
+    const [customer, setCustomer ] = useState([])
+    const [login, setLogin] = useState([])
+    const [username, setUsername ] = useState('')
+    const [mode, setMode] = useState(false)
+    const [darkMode, setDarkMode] = useState('light')
+    
     const handleMenuButton = () => 
     {
        
         setMenu(!menu)
     }
    
- 
-  
+   
+    useEffect(() =>
+    {
+     const fetchData = async () => 
+     {
+     await axios.get("http://localhost:8000/customer")
+      .then((res) => setCustomer(res.data) )
+
+     }
+     fetchData()
+     localStorage.setItem("Mode", darkMode)
+     const savedTheme = localStorage.getItem("Mode")
+   
+    },[darkMode])
+
+    useEffect(() => 
+    {
+      const fetchData = async () => 
+      {
+        await axios.get("http://localhost:8000/Logins")
+        .then((res) => setLogin(res.data))
+
+        login.map((data) => 
+        {
+          setUsername(data.username)
+        })
+
+      }
+      fetchData() 
+    }, [login.length])
+    const handleDarkMode = () => 
+    {
+      setMode(!mode)
+      if(mode){
+         setDarkMode('light')
+         return  localStorage.setItem('Mode', darkMode)
+
+      } 
+      else
+      {
+        setDarkMode('dark')
+        return  localStorage.setItem('Mode', darkMode)
+
+
+      } 
+    
+    }
+
    return(
     <>
-<nav className="bg-gray-800 top-0 left-0 right-0 place-items-start">
+    <div className={darkMode}>
+    <nav className="bg-gray-800 top-0 left-0 right-0 place-items-start">
   <div className=" fixed bg-slate-900 top-0 left-0 right-0 ">
     <div className="relative flex h-16 items-center justify-between ">
       <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -39,24 +97,44 @@ function Navbar()
         <div className="flex shrink-0 items-center">
           <image className="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"/>
         </div>
-        <div className="hidden sm:ml-6 sm:block top-0 left-0 right-0">
-          <div className="flex space-x-4">
-            <a className="rounded-md px-3 py-2  font-bold text-white font-serif text-1xl bg-cyan-600 tracking-[.12em]" aria-current="page">BLOO</a>
+        <div className="flex  sm:ml-6 sm:block top-0 left-0 right-0 relative ">
+          <div className="flex relative  space-x-4">
+            <a className="rounded-md px-3 py-1  font-bold text-white font-serif text-1xl bg-cyan-600 tracking-[.12em] relative flex w- h-10 dark:bg-violet-600" aria-current="page"><p className="font-serif font-semibold pt-1">BLOO</p><FaOpencart  className="w-8 h-12 pb-6 pl-1"/></a>
             <a href="schoolHome" className=" rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
             <a href="schoolProducts" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Products</a>
             <a href="schoolCart" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Cart</a>
           </div>
         </div>
+        <div className="pl-7 pt-2 ">
+          <input className="w-[42rem] text-center font-serif rounded-md h-[2rem] bg-slate-100" type="text"  placeholder="Search..." />
+        </div>
       </div>
       <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <button type="button" className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
           <span className="absolute -inset-1.5"></span>
-          <span className="sr-only">View notifications</span>
-          <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-          </svg>
         </button>
+        {/*fetching username*/}
 
+
+        <div className="relative flex ">
+          <p className="text-white font-serif font-semibold relative flex items-center justify-center pt-2">
+          {username} <FaSmile className="w-10  h-6 text-cyan-500 pr-4 pl-2 dark:text-violet-600" /> 
+          
+          
+          
+          {/*button dark mode*/}
+
+          {
+            mode && <button onClick={handleDarkMode}><MdSunny className="pr-4 text-violet-600 h-10 w-10 " />
+          </button>
+          }
+         {/*button light mode*/}
+          {
+            !mode && <button onClick={handleDarkMode}><FaMoon className="pr-4 text-cyan-500 h-10 w-10 " />
+            </button>
+          }
+          </p>
+        </div>
         <div className="relative ml-3 pr-12">
           <div>
             <button onClick={handleMenuButton} className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 " id="user-menu-button" aria-expanded="false" aria-haspopup="true">
@@ -85,8 +163,11 @@ function Navbar()
       <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Projects</a>
       <a href="#" className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Calendar</a>
     </div>
+    <div>
+  </div>
   </div>
 </nav>
+    </div>
 
     </>
    )
