@@ -167,7 +167,7 @@ function Navbar()
         {/*fetching username*/}
 
 
-        <div className="relative flex ">
+        <div className="relative flex">
           <p className="text-white font-serif font-semibold relative flex items-center justify-center pt-2">
           {username} <FaSmile className="w-10  h-6 text-cyan-500 pr-4 pl-2 dark:text-violet-600" /> 
           
