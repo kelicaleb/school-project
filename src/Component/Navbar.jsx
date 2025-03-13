@@ -14,12 +14,27 @@ function Navbar()
     const [username, setUsername ] = useState('')
     const [mode, setMode] = useState(false)
     const [darkMode, setDarkMode] = useState('light')
+    const [input, setInput ] = useState('')
+    const [search, setSearch ] = useState(false)
+    const [data, setData ] = useState([])
+    const [top, setTop] =  useState('0.5rem')
     
     const handleMenuButton = () => 
     {
        
         setMenu(!menu)
     }
+    useEffect(() => 
+    {
+      const fetchData = async () => 
+      {
+        await axios.get("https://fakestoreapi.com/products")
+        .then((res) => setData(res.data) )
+        
+       
+      }
+      fetchData() 
+    },[search])
    
    
     useEffect(() =>
@@ -68,6 +83,29 @@ function Navbar()
       } 
     
     }
+    useEffect(() => 
+    {
+      window.addEventListener("click", e => 
+      {
+        e.preventDefault()
+        setSearch(false)
+      }
+      )
+      if(input === '')
+      {
+        return setSearch(false)
+
+      }
+      else{
+        return setSearch(true)
+      }
+      
+    },[input])
+    const handleInput = (value) => 
+    {
+      setInput(value)
+    
+    }
 
    return(
     <>
@@ -105,10 +143,23 @@ function Navbar()
             <a href="schoolCart" className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Cart</a>
           </div>
         </div>
-        <div className="pl-7 pt-2 ">
-          <input className="w-[42rem] text-center font-serif rounded-md h-[2rem] bg-slate-100" type="text"  placeholder="Search..." />
-        </div>
       </div>
+      <div className=" max-h-[8rem]   top-0 z-10 pt-8 mr-[44rem] ">
+          <div className="absolute top-0 z-10 mr-[22rem] pt-4" >
+          <input className=" sticky top-0 w-[42rem] text-center font-serif rounded-md h-[2rem] bg-slate-100" type="text"  placeholder="Search..." 
+          value={input} onChange={e => handleInput(e.target.value)} />
+          </div>
+        <div className="absolute max-h-[10rem] overflow-auto  top-[3.2rem] z-10 ">
+        {
+            search && 
+            data.map(data => 
+            <div className="bg-white w-[42rem] ">
+                <p className="text-sm">{data.category}</p>
+            </div>
+            )
+          }
+        </div>
+        </div>
       <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <button type="button" className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
           <span className="absolute -inset-1.5"></span>
