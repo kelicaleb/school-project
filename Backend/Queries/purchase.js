@@ -42,6 +42,11 @@ const Purchase = () =>
         {
             type: DataTypes.STRING, 
             allowNull: false
+        }, 
+        phoneNumber:
+        {
+            type: DataTypes.STRING, 
+            allowNull: false
         }
     },
     {
@@ -67,9 +72,9 @@ const Purchase = () =>
 purchase.post("/posts", async  (req, res) => 
 {
     try{
-        const {images, price, amount, total, title } = req.body
+        const {images, price, amount, total, title, phoneNumber } = req.body
         const inserts = await Purchases.create(
-        {images, price,amount, total, title })
+        {images, price,amount, total, title, phoneNumber })
         return  res.status(200).json(inserts)
         
     }

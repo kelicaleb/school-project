@@ -17,6 +17,7 @@ function Register()
     const[gender, setGender ] = useState('')
     const[tick, setTick] = useState(0)
     const[count, setCount ] = useState(false)
+    const [phoneNumber, setPhoneNumber ] = useState('')
     const clock = () => 
     {
         setTick(prevTick => prevTick + 1)
@@ -43,27 +44,34 @@ function Register()
     {
         setGender(e)
     }
-    const handleSubmit = (e) => 
+    const handleSubmit = async (e) => 
     {
         e.preventDefault()
-        axios.post("http://localhost:8000/customer/posts", 
-            {
-                email:email, 
-                username:username, 
-                password:password, 
-                dob:dob, 
-                gender:gender
-            }
-        )
-        .then((res) => console.log(res))
-        axios.post("http://localhost:8000/Logins/posts", 
-            {
-                gender:gender
-            }
-        )
-        .then((res) => console.log(res))
-        setCount(true)
-        toast.success("Redirectiing...")
+        try{ 
+            await axios.post("http://localhost:8000/customer/posts", 
+                {
+                    email:email, 
+                    username:username, 
+                    password:password, 
+                    phoneNumber: phoneNumber, 
+                    dob:dob, 
+                    gender:gender, 
+                    theme:"light"
+                }
+            )
+            .then((res) => console.log(res))
+            axios.post("http://localhost:8000/Logins/posts", 
+                {
+                    gender:gender
+                }
+            )
+            .then((res) => console.log(res))
+            setCount(true)
+            toast.success("Redirectiing...")
+        }
+        catch{ 
+            console.log("error posting")
+        }
 
       
     }
@@ -76,7 +84,7 @@ function Register()
             </div>
                 <div className="relative flex items-center justify-center  w-screen">
                     <div className="bg-gray-800 h-[38.6rem] w-1/2 rounded-md">
-                        <h2 className="text-center font-semibold font-serif text-gray-300 text-4xl pt-7">Register</h2>
+                        <h2 className="text-center font-semibold font-serif text-gray-300 text-4xl pt-2">Register</h2>
                         <TypeAnimation className="text-gray-200 font-serif "
                          sequence={[
                         'Welcome!',
@@ -94,44 +102,49 @@ function Register()
                         repeat={Infinity}
                         />
                         <div className="relative flex justify-center items-center ">
-                        <FaFaceSmileWink  className="text-cyan-500 w-10 h-10"/>
+                        <FaFaceSmileWink  className="text-cyan-500 w-9 h-9"/>
                         </div>
                         <form onSubmit={handleSubmit}> 
                             <div className="pr-96 pl-2">
                             <p className="font-serif text-gray-200 font-semibold pr-44">Email:</p>
                             </div>
-                            <div className=" pt-2">
+                            <div className="">
                             <input required  className="bg-slate-900 h-10 w-[38rem] rounded-md text-center text-white  font-serif" type="email" placeholder="Email"
                             value={email} onChange={e => setEmail(e.target.value)} />
                             </div>
-                            <div className="pt-2 pr-96">
+                            <div className="pt-1 pr-96">
                                 <p className="font-serif font-semibold pr-32 text-gray-200">Username:</p>
                             </div>
-                            <div className="pt-2">
+                            <div className="pt-1">
                                 <input required className="text-center font-serif rounded-md h-10 w-[38rem] text-white bg-slate-900 " type="text" placeholder="username"
                                 value={username}  onChange={e => setUsername(e.target.value)}/>
                             </div>
-                            <div className="pt-2 pr-96">
+                            <div className="pt-1 pr-96">
                                 <p className="font-serif font-semibold pr-32 text-gray-200">Password:</p>
                             </div>
-                            <div className="pt-2">
+                            <div className="pt-1">
                                 <input required  className="text-white text-center font-serif rounded-md h-10 bg-slate-900 w-[38rem]" type="password" placeholder="password"
                                 value={password}    onChange={e => setPassword(e.target.value)}/>
                             </div>
-                            <div className="pt-2 pr-96">
+                            <div className="pt-1 pr-96">
                                 <p className="font-semibold font-serif text-gray-200 pr-28">Date of Birth:</p>
                             </div>
-                            <div className="pt-2">
+                            <div className="pt-1">
                                 <input required className=" text-center font-serif  rounded-md h-10 w-[38rem] bg-slate-900 text-white" type="date" placeholder="DOB"
                                 value={dob} onChange={e => setDob(e.target.value)}/>
                             </div>
-                            <div className="flex pl-52 pt-2">
+                            <div className="flex pl-52 pt-1">
                             <label className="text-white">Male:</label>
                             <input required type="radio" value="Male" checked={gender === "Male"} onChange={(e) => handleGender(e.target.value)}/>
                             <div className="pl-40">
                             <label className="text-white">Female:</label>
                             <input required type="radio" value="Female" checked={gender === "Female"} onChange={(e) => handleGender(e.target.value)}/>
                             </div>
+                            </div>
+                            <div className="pt-1">
+                                <p className="font-serif font-semibold pr-[30rem] text-gray-200">Phone Number:</p>
+                                <input required className="text-center font-serif rounded-md h-10 w-[38rem] bg-slate-900 text-white" type="text" 
+                                placeholder="phone Number"  value={phoneNumber}  onChange={e => setPhoneNumber(e.target.value)}/>
                             </div>
                             <div className="pt-4">
                                 <button className="w-[38rem] h-10 text-white font-serif rounded-md bg-cyan-500 hover:bg-cyan-400"  type="submit">Submit</button>

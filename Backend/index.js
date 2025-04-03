@@ -7,7 +7,7 @@ import Transaction from './Queries/transaction.js'
 import bcrypt from 'bcrypt'
 import Customer from './Queries/Customer.js'
 import Login from './Queries/Login.js'
-
+import Mpesa from './Queries/Mpesa.js'
 dotenv.config()
 const port = process.env.PORT
 
@@ -23,6 +23,8 @@ const customer = Customer()
 app.use("/customer", customer)
 const login = Login()
 app.use("/Logins", login)
+const mpesa = Mpesa() 
+app.use("/Mpesa", mpesa)
 
 
 const db = mysql2.createConnection({

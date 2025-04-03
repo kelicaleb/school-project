@@ -17,7 +17,8 @@ function Navbar()
     const [input, setInput ] = useState('')
     const [search, setSearch ] = useState(false)
     const [data, setData ] = useState([])
-    const [top, setTop] =  useState('0.5rem')
+    const [list, setList] = useState([])
+    const [ control, setControl ]= useState(true)
     
     const handleMenuButton = () => 
     {
@@ -85,15 +86,10 @@ function Navbar()
     }
     useEffect(() => 
     {
-      window.addEventListener("click", e => 
-      {
-        e.preventDefault()
-        setSearch(false)
-      }
-      )
+    
       if(input === '')
       {
-        return setSearch(false)
+        return setSearch(false) 
 
       }
       else{
@@ -105,12 +101,23 @@ function Navbar()
     {
       setInput(value)
     
+    
     }
+    // search algorithim 
+    useEffect(() => 
+    {
+      const result = data.filter((data) => 
+      {
+        return data && data.title && data.title.toLowerCase().includes(input)
+      })
+      setList(result)
+      console.log(list)
+    },[input])
 
    return(
     <>
-    <div className={darkMode}>
-    <nav className="bg-gray-800 top-0 left-0 right-0 place-items-start">
+    <div className="sticky top-0">
+    <nav className="bg-gray-800 top-0 left-0 right-0 place-items-start sticky">
   <div className=" fixed bg-slate-900 top-0 left-0 right-0 ">
     <div className="relative flex h-16 items-center justify-between ">
       <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -151,13 +158,20 @@ function Navbar()
           </div>
         <div className="absolute max-h-[10rem] overflow-auto  top-[3.2rem] z-10 ">
         {
-            search && 
-            data.map(data => 
-            <div className="bg-white w-[42rem] ">
-                <p className="text-sm">{data.category}</p>
+            search && control && list.map(data => 
+            <div className="bg-white w-[42rem] bg-opacity-[.90]  hover:bg-slate-200">
+                <p className="text-sm font-serif ">{data.title}</p>
             </div>
             )
-          }
+           
+        }
+        {
+           !search && !control && list.map(data => 
+            <div className="bg-white w-[42rem] bg-opacity-[.90] rounded-md">
+              <p className="text-sm font-serif">{data.title}</p>
+          </div>
+          )
+        }
         </div>
         </div>
       <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
@@ -218,7 +232,7 @@ function Navbar()
   </div>
   </div>
 </nav>
-    </div>
+</div>
 
     </>
    )

@@ -7,31 +7,55 @@ import axios from 'axios'
 function Cart()
 {
     const [products, setProducts]  =  useState([])
-    const [amount, setAmount ] = useState([])
+    const [customer, setCustomer] = useState([])
+    const [phoneNumber, setPhoneNumber] = useState('')
     useEffect(() => 
     {
-        axios.get("http://localhost:8000/products")
-        .then((res) => setProducts(res.data))   
-    })
-    const handleRemove = (id) => 
+      const fetchData = async ()=> 
+        {
+            axios.get("http://localhost:8000/products")
+            .then((res) => setProducts(res.data))
+        } 
+        fetchData()  
+    },[products])
+    useEffect(() => 
+    {
+       const fetchData  = async ()=> 
+       {
+        await axios.get("http://localhost:8000/customer")
+        .then((res) => setCustomer(res.data))
+        customer.map((data) => 
+        {
+            setPhoneNumber(data.phoneNumber)
+            console.log("this is the phone number", data.phoneNumber)
+        })
+       }
+       fetchData()
+    },[products])
+    const handleRemove = async(id) => 
     {
         console.log(id)
-        axios.delete(`http://localhost:8000/delete/${id}`)
+        await axios.delete(`http://localhost:8000/delete/${id}`)
         .then((res) => console.log("deleted successfully"))
+        const remove  = products.filter((data) => data.id !==  id)
+        setProducts(remove)
     }
-    const handlePurchase  = (data) => 
+    const handlePurchase  = async (data) => 
     {
-        console.log(data)
-        axios.post("http://localhost:8000/purchase/posts", 
+        
+      
+        await axios.post("http://localhost:8000/purchase/posts", 
             {
                 images: data.image, 
                 price: data.price, 
                 amount: 1, 
                 total: data.price,
-                title: data.title
+                title: data.title, 
+                phoneNumber:phoneNumber
             }
         )
-        .then((res) => window.location.href = 'Purchase')
+        .then((res) => window.location.href="Purchase")
+        
     }
    
     return(

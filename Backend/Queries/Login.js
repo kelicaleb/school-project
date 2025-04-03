@@ -47,7 +47,7 @@ const Login = () =>
     }
     catch{
         console.log("Error fecthing data")
-        return res.status(500).json({message:"Error fetching data"})
+        return res.status(500).json({message:"Error fetching data from Login "})
     }
 })
 login.post("/posts", async (req, res) => 

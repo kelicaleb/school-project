@@ -32,7 +32,11 @@ const Customer = () =>
         password:{
             type:DataTypes.STRING, 
             allowNull: false
-        }, 
+        },
+        phoneNumber:{
+            type:DataTypes.STRING, 
+            allowNull:false
+        },
         dob:
         {
             type:DataTypes.DATE, 
@@ -41,7 +45,11 @@ const Customer = () =>
         gender:{
             type:DataTypes.STRING, 
             allowNull:false
-        }, 
+        },
+        theme:{
+            type:DataTypes.STRING, 
+            allowNull:false
+        } 
 
     }, 
 {
@@ -67,13 +75,13 @@ customer.get("/", async(req, res) =>
 customer.post("/posts",async (req, res) => 
 {
     try{
-        const { email, username, password, dob, gender} = req.body
+        const { email, username, password,  phoneNumber,  dob, gender, theme} = req.body
         const salt = await  bcrypt.genSalt(10)
         const hash = await bcrypt.hash(password, salt)
         console.log(hash)
 
         const inserts = Customers.create({
-         email, username, password:hash, dob, gender
+         email, username, password:hash, phoneNumber, dob, gender, theme
         })
         console.log("user has been created")
         return res.status(200).json(inserts)

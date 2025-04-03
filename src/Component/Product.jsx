@@ -74,7 +74,7 @@ function Product()
     return(
         <>
            <div className={mode}>
-           <h1 className=" dark:text-violet-600 box-decoration-slice  underline text-center text-cyan-600  text-5xl pt-12 pr-40 font-serif font-bold"><a href="sijs">Clime </a> </h1>
+           <h1 className=" dark:text-violet-600 box-decoration-slice  underline text-center text-cyan-600  text-5xl pt-12 pr-40 font-serif font-bold">Products </h1>
             <Navbar/> 
             <ToastContainer />
             <div className="flex items-center justify-center pl-96 pt-12 pb-12 ">
@@ -106,7 +106,6 @@ function Product()
                                       </div>
                                      <div className="pt-2 left-0 right-0">
                                          <button onClick={() => handleCart(users)} className="font-serif border border-cyan-600 hover:bg-cyan-600 hover:text-white w-24 h-10 rounded-lg">Add Cart</button>
-                                       
                                      </div>
                                  </div>
                                </div>

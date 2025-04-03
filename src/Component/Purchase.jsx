@@ -1,129 +1,112 @@
-import React, {useState, useEffect } from 'react'
+import React, {useState, useEffect  } from 'react'
 import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify';
+import { TiTick } from "react-icons/ti";
 
 
 
 
 function Purchase()
 {
-    const [items, setItems ] = useState([])
-    const [amount, setAmount ] = useState('')
-    const [control, setControl ] = useState(true)
-    const [tick, setTick ] = useState(0)
-    const [start, setStart ] = useState(false)
+    const [data, setData] = useState([])
+    const [purchase, setPurchase ] = useState([])
+    const [amount, setAmount] = useState('')
+    const [notification, setNotification] = useState(false)
+    const [height, setHeight] = useState("25rem")
+    const [phoneNumber, setPhoneNumber ] = useState('')
 
 
-
-
-    const clock = () => 
+    useEffect(() => 
     {
-        setTick(prevTick => prevTick + 1 )
+        const fetchData = async () => 
+        {
+            await axios.get("http://localhost:8000/purchase")
+            .then((res) => setData(res.data))
+
+            await axios.get("http://localhost:8000/purchase")
+            .then((res) => setPurchase(res.data))
+        }
+        fetchData()
+    },[data, purchase])
+    const handleSubmit = async (e) => 
+    {
+        e.preventDefault()
+    
+
     }
-    const handleSubmit = (e)=> 
-        {
-            e.preventDefault()
-            console.log("hello")
-            setStart(true)
-            if(!control)
-                {
-                    axios.delete(`http://localhost:8000/purchase/delete/${id}`)
-                }
-          items.map((data) => 
-        {
-           console.log(data)   
-            axios.post("http://localhost:8000/transaction/post", 
-                {
-                        amount: amount, 
-                        price: data.total, 
-                        customerId: 1, 
-                 }
-               )
-        })
-        } 
-    const handleClick = (id) => 
+    const handlePurchase = async(data) => 
     {
-        setStart(true)
-        console.log(id)
-        let total;
-        items.forEach((data) => 
+        setNotification(true)
+        console.log(data)
+        purchase.map((data) => 
         {
-            total = amount * data.price
-            axios.patch(`http://localhost:8000/purchase/patches/${id}`,
+            console.log("this is the data", data)
+            setPhoneNumber(data.phoneNumber)
+        })
+        setHeight("28rem")
+        await axios.post("http://localhost:8000/transaction/post", 
             {
-                total
+                amount:amount,
+                price: data.price, 
+                customerId:1
             }
         )
-        })
-        toast.success("Successfully Purchased")
-        toast.success(`Total:$${total}`)    
-        axios.delete(`http://localhost:8000/purchase/delete/${id}`)
-      
-    }
-  
-    useEffect(() => 
-        {
-            axios.get("http://localhost:8000/purchase")
-            .then((res) => setItems(res.data))
-            if(start)
+        .then((res) => console.log(res.data))
+        await axios.post("http://localhost:8000/Mpesa/post", 
             {
-                const ticking = setInterval(clock, 1000)
-                console.log(tick)
-                if(tick == 3)
-                {
-                    setControl(false)
-                    window.location.href = "schoolCart"
-                    
-                }
-                return(() => 
-                {
-                    clearInterval(ticking)
-                })
-                
-            }
-            axios.get ("http://localhost:8000/transaction")
-            .then((res) => console.log(res.data))
-            
-            
-        }, [start, tick, control])
-    const handleAmount = (values, id) => 
-        {
-            setAmount(values)
-       
-        }
-       
- 
-  
-    return(
+                Amount:parseInt(data.price) * amount, 
+                PhoneNumber:phoneNumber,
+                Product:"Mens"
+
+            })
+
+    }
+     return(
         <>
-        <h1 className="text-5xl text-cyan-600 font-bold underline"> Purchase</h1>
-        <div className="font-bold font-serif ">
-        <ToastContainer/>
-        </div>
-        {
-           control &&  items.map(data => 
-            <>
-                <div className="relative flex items-center justify-center pt-20">
-                    <form className="bg-gray-200 w-96 h-80 shadow-lg shadow-cyan-600 "   key={data.purchaseId} onSubmit={handleSubmit}>
-                        <div className="flex relative items-center justify-center pt-16 bg-gray-200">
-                        <img className="h-20" src={data.images}/>
+        <div className="bg-slate-800 rounded-md  w-[22rem] shadow-xl shadow-cyan-500   ml-[25rem] mt-[7rem]" style={{height:`${height}`}}>
+           {
+            data.map(data => 
+                <>
+                 <div>
+                <h1 className="text-3xl font-serif font-bold text-white pt-2">Purchase</h1>
+                <div>
+                    <form onSubmit={handleSubmit}> 
+                        <div className="relative flex pt-6 items-center justify-center "> 
+                        <img className="h-[5em] w-16" src={data.images}/>
                         </div>
-                        <p className="font-serif">{data.title}</p>
-                        <p className="font-bold font-serif">Price: ${data.price}</p>
+                        <p  className="text-white font-semibold"> $Price {data.price}</p>
+                        <div>
+                            <p className="font-serif font-semibold text-white pr-[16rem] pt-2">Amount:</p>
+                            <div className="pr-2 pt-2">
+                            <input type="number" className="w-[20rem]  h-[2rem] rounded-md bg-slate-950 text-white font-serif font-semibold text-center " 
+                            placeholder="Amount" value={amount} onChange={e => setAmount(e.target.value)}/>
+                            </div>
+                        </div>
                         <div className="pt-2">
-                        <input className="rounded-full text-center font-serif w-32" type="number" placeholder="amount" value={amount} onChange={e => handleAmount(e.target.value, data.purchaseId)}/>
-                        <div className="pt-6 ">
-                        <button type="submit" onClick={() => handleClick(data.purchaseId)} className=" w-32 text-white  font-bold h-8 font-serif rounded-lg bg-green-500 hover:bg-green-400">Confirm</button>
+                            <p className="pt-2 font-serif pr-[15rem] text-white font-semibold">Payment:</p>
+                            <select className="bg-slate-950 rounded-md h-[2rem] w-[20rem] text-white font-serif text-center"  onChange={e =>setPurchase(e.target.value)} >
+                                <option value="Mpesa">Mpesa</option>
+                            </select>
                         </div>
+                        {
+                            notification && 
+                            <div className="pt-1">
+                            <h1 className="font-serif text-sm text-green-500 font-semibold flex"><TiTick className="w-6 h-6"/>Check your phone</h1>
+                        </div>
+                        }
+                        <div className="pt-4">
+                            <button className="bg-cyan-600 rounded-md text-white font-serif h-[2rem] w-[20rem] hover:bg-cyan-500" type="submit" onClick={() => handlePurchase(data)}>Purchase</button>
                         </div>
                     </form>
                 </div>
-            </>
-        )
-        }
+            </div>
+                </>
+            )
+           }
+        </div>
         </>
-    )
+     )
+
 }
 
 
-export default Purchase 
+export default Purchase

@@ -9,6 +9,7 @@ import Purchase from './Component/Purchase'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './Component/Login';
 import Register from './Component/Register'
+import Test from './Component/Test'
 function App() {
   const [logging, setLogging] = useState(false)
   const[dark, setDark ] = useState("dark")
@@ -24,6 +25,7 @@ function App() {
           <Route path="school-project/Purchase" element={<Purchase/>}/>
           <Route path="school-project/Login" element={<Login/>}/>
           <Route path="school-project/Register" element={<Register/>}/>
+          <Route path="school-project/Test" element={<Test/>}/>
         </Routes>
       </BrowserRouter>
     </div>
