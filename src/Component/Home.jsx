@@ -15,6 +15,7 @@ import { MdOutlineCategory } from "react-icons/md";
 import { HiQuestionMarkCircle } from "react-icons/hi";
 import { IoMdFlame } from "react-icons/io";
 import { GiHidden } from "react-icons/gi";
+import Display from './Slideshow'
 
 
 
@@ -73,26 +74,7 @@ function Home()
   }, [login.length])  
     
   
-    const female = [
-        {
-            url:'https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg'
-        },
-        {
-            url: 'https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg',
-          },
-          {
-            url: 'https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg',
-          },
-          {
-            url:'https://fakestoreapi.com/img/51UDEzMJVpL._AC_UL640_QL65_ML3_.jpg'
-          },
-          {
-            url:"https://fakestoreapi.com/img/71YAIFU48IL._AC_UL640_QL65_ML3_.jpg"
-          },
-          {
-            url:"https://fakestoreapi.com/img/51Y5NI-I5jL._AC_UX679_.jpg"
-          }
-    ]
+   
     const slides = [
         {
           url: 'https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg',
@@ -165,9 +147,9 @@ function Home()
    
     return(
         <>
+            <div className={mode + "relative"}>
             <Navbar/>
-            <div className={mode}>
-            <div className="pl-2 relative">
+            <div className="pl-2">
            <h1 className="pb-4 text-center pt-8 font-serif underline text-5xl text-cyan-600 font-semibold dark:text-violet-600">Home Page</h1>
             <div className="w-[78rem] bg-cyan-600 h-12 pt-2  rounded-md dark:bg-violet-600 ">
               <h1 className="text-white text-1xl font-serif font-semibold pr-[66rem] pt-1">{username} top picks</h1>
@@ -182,7 +164,7 @@ function Home()
         }
          
        <div className="grid grid-cols-3 pr-[32rem] pt-8 group">
-        <div className="bg-slate-800  h-[20rem] w-[14rem] rounded-md pl-1 pt-2">
+        <div className=" bg-slate-800  h-[20rem] w-[14rem] rounded-md pl-1 pt-2">
           <div className="flex hover:text-cyan-500 w-[13rem] h-10 pt-1 text-white pl-2">
           <GiClothesline className="w-8 h-8 " />
           <a className=" pr-12 font-serif text-sm pl-2 pt-2 font-semibold">Mens Clothes</a> 
@@ -206,14 +188,14 @@ function Home()
         </div>
         <div>
             <div className='py-2 group  ml-[10rem]'>
-            <div className="relative  w-screen">
+            <div className="  w-screen">
                 <img className="h-[17rem] w-[20rem] bg-slate-900" src={slides[currentIndex].url} alt="slide" />
             </div>
-          <div className='hidden group-hover:block absolute top-[20rem] translate-x-0 translate-y-[-50%] left-[20rem] text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+          <div className='hidden group-hover:block absolute top-[20rem] translate-x-0 translate-y-[-50%] left-[25rem] text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
             <BsChevronCompactLeft onClick={prevSlide} size={30} />
           </div>
           {/* Right Arrow */}
-          <div className='hidden group-hover:block absolute top-[20rem] -translate-x-0 translate-y-[-50%] right-[30rem] text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+          <div className='hidden group-hover:block absolute top-[20rem] -translate-x-0 translate-y-[-50%] right-[25rem] text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
             <BsChevronCompactRight onClick={nextSlide} size={30} />
           </div>
           <div className=' pl-[10rem] flex top-4 justify-center py-2 pt-12'>
@@ -234,12 +216,13 @@ function Home()
         </div>
         <div className=" ml-[25rem] h-[15rem] w-[15rem] bg-slate-800 rounded-md">
             <ul className="text-white font-serif  pt-4 font-bold text-[1.2rem]">
-                <l1 className="relative flex pl-2 hover:text-cyan-500 pt-2 "><HiQuestionMarkCircle className="h-7 w-8" />Help Center</l1>
-                <l1 className="relative flex pl-2 hover:text-cyan-500 pt-4 "><IoMdFlame className="h-7 w-8" />Top Deals</l1>
-                <l1 className="relative flex pl-3 hover:text-cyan-500 pt-5 "><GiHidden className="h-7 w-8" />Exclusive</l1>
+                <l1 className="flex pl-2 hover:text-cyan-500 pt-2 "><HiQuestionMarkCircle className="h-7 w-8" />Help Center</l1>
+                <l1 className=" flex pl-2 hover:text-cyan-500 pt-4 "><IoMdFlame className="h-7 w-8" />Top Deals</l1>
+                <l1 className=" flex pl-3 hover:text-cyan-500 pt-5 "><GiHidden className="h-7 w-8" />Exclusive</l1>
             </ul>
         </div>
        </div>
+       <div><Display username={username}/></div>
         </div>
             </div>
         </>
