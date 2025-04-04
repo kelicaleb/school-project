@@ -26,7 +26,7 @@ function Purchase()
             .then((res) => setPurchase(res.data))
         }
         fetchData()
-    },[data, purchase])
+    },[] )
     const handleSubmit = async (e) => 
     {
         e.preventDefault()

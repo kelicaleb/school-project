@@ -117,7 +117,7 @@ function Navbar()
    return(
     <>
     <div className="sticky top-0">
-    <nav className="bg-gray-800 top-0 left-0 right-0 place-items-start sticky">
+    <nav className="bg-gray-800 top-0 left-0 right-0 place-items-start sticky z-20">
   <div className=" fixed bg-slate-900 top-0 left-0 right-0 ">
     <div className="relative flex h-16 items-center justify-between ">
       <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">

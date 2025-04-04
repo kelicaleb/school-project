@@ -21,3 +21,6 @@ DELETE FROM Purchased;
 DELETE FROM Cart;
 DELETE FROM Customer; 
 SELECT * FROM Purchased;
+
+DELETE FROM Customer
+WHERE customerId = 4;
