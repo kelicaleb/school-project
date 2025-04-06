@@ -16,6 +16,7 @@ import { HiQuestionMarkCircle } from "react-icons/hi";
 import { IoMdFlame } from "react-icons/io";
 import { GiHidden } from "react-icons/gi";
 import Display from './Slideshow'
+import Contact from './Contact'
 
 
 
@@ -222,7 +223,8 @@ function Home()
             </ul>
         </div>
        </div>
-       <div><Display username={username}/></div>
+       <div className=""><Display username={username}/></div>
+       <div><Contact/></div>
         </div>
             </div>
         </>
