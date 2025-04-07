@@ -24,3 +24,19 @@ SELECT * FROM Purchased;
 
 DELETE FROM Customer
 WHERE customerId = 4;
+SHOW TABLES; 
+SELECT * FROM Login; 
+ALTER TABLE Login 
+ADD COLUMN phonrNumber VARCHAR(20);
+DELETE FROM Login; 
+ALTER TABLE Login 
+DROP COLUMN admin;
+DROP TABLE Login;
+CREATE TABLE Login 
+(
+    loginId INT PRIMARY KEY AUTO_INCREMENT, 
+    gender VARCHAR(10), 
+    username VARCHAR(20),
+    phoneNumber VARCHAR(20)
+); 
+DELETE FROM Purchased;

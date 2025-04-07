@@ -32,22 +32,6 @@ function Home()
     const [username, setUsername] = useState('')
     const [mode, setMode ] = useState("light bg-slate-200 bg-no-repeat bg-center bg-cover inset-0 mt-16 h-screen w-screen absolute flex h-[37.7rem]")
   
-  useEffect(() => 
-  {
-    const data = localStorage.getItem("Mode")
-    if(data === 'light')
-    {
-      setMode('light')
-      
-    }
-    else{
-      setMode('dark')
-    }
-  
-
-  })
-
-
 
    useEffect(() => 
   {
@@ -55,6 +39,7 @@ function Home()
     {
       await axios.get("http://localhost:8000/Logins")
       .then((res) => setLogin(res.data))
+      console.log("this is the username ", username)
 
       login.map(async (data) => 
       {

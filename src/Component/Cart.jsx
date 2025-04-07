@@ -18,20 +18,7 @@ function Cart()
         } 
         fetchData()  
     },[products])
-    useEffect(() => 
-    {
-       const fetchData  = async ()=> 
-       {
-        await axios.get("http://localhost:8000/customer")
-        .then((res) => setCustomer(res.data))
-        customer.map((data) => 
-        {
-            setPhoneNumber(data.phoneNumber)
-            console.log("this is the phone number", data.phoneNumber)
-        })
-       }
-       fetchData()
-    },[products])
+   
     const handleRemove = async(id) => 
     {
         console.log(id)

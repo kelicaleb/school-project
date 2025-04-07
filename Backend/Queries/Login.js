@@ -24,10 +24,16 @@ const Login = () =>
             type: DataTypes.STRING, 
             allowNull: false
         }, 
+     
         username:{
             type: DataTypes.STRING,
             allowNull: false
-        }
+        }, 
+        phoneNumber: 
+        {
+          type:DataTypes.STRING, 
+          allowNull:false  
+        },
     }, 
     {
         tableName:"Login", 
@@ -53,12 +59,13 @@ const Login = () =>
 login.post("/posts", async (req, res) => 
 {
     try{
-        const {gender, username } = req.body
+        const {gender, username, phoneNumber } = req.body
         console.log(username)
         const inserts = await Logins.create(
             {
                 gender, 
-                username
+                username, 
+                phoneNumber
             }
         )
         return res.status(200).json(inserts)

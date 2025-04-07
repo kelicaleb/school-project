@@ -13,6 +13,31 @@ function Purchase()
     const [notification, setNotification] = useState(false)
     const [height, setHeight] = useState("25rem")
     const [phoneNumber, setPhoneNumber ] = useState('')
+    const[login, setLogin ] = useState([])
+    const [username, setUsername ] = useState('')
+
+
+
+
+    useEffect(() => 
+        {
+          const fecthData = async () => 
+          {
+            await axios.get("http://localhost:8000/Logins")
+            .then((res) => setLogin(res.data))
+            console.log("this is the username ", username)
+      
+            login.map(async (data) => 
+            {
+              setUsername(data.username)
+              localStorage.setItem("phoneNumber", data.phoneNumber )
+              const pn = localStorage.getItem("phoneNumber") 
+              setPhoneNumber(pn)             
+            })
+      
+          }
+          fecthData()
+        },[login.length])
 
 
     useEffect(() => 
@@ -26,7 +51,9 @@ function Purchase()
             .then((res) => setPurchase(res.data))
         }
         fetchData()
-    },[] )
+    },[])
+    //from the table Login
+    
     const handleSubmit = async (e) => 
     {
         e.preventDefault()
@@ -37,11 +64,7 @@ function Purchase()
     {
         setNotification(true)
         console.log(data)
-        purchase.map((data) => 
-        {
-            console.log("this is the data", data)
-            setPhoneNumber(data.phoneNumber)
-        })
+     
         setHeight("28rem")
         await axios.post("http://localhost:8000/transaction/post", 
             {
@@ -67,7 +90,7 @@ function Purchase()
             data.map(data => 
                 <>
                  <div>
-                <h1 className="text-3xl font-serif font-bold text-white pt-2">Purchase</h1>
+                <h1 className="text-3xl font-serif font-bold text-white pt-2">Purchase {phoneNumber}</h1>
                 <div>
                     <form onSubmit={handleSubmit}> 
                         <div className="relative flex pt-6 items-center justify-center "> 

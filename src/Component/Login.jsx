@@ -33,7 +33,7 @@ function Login()
 
  
   
-   const handleClick = async () => 
+   const handleLogin = async () => 
     {
        
      try{    
@@ -47,7 +47,8 @@ function Login()
          await axios.post("http://localhost:8000/Logins/posts", 
              {
                  gender:data.gender, 
-                 username:data.username
+                 username:data.username, 
+                 phoneNumber:data.phoneNumber
              }
          )
      })
@@ -124,7 +125,7 @@ function Login()
                     <a className="pr-12 text-blue-400 hover:underline">Forgot Password?</a>
                    </div>
                    <div className="pl-4 pt-4">
-                    <button onClick={handleClick} type="submit" className="text-white bg-cyan-500 w-80 h-9 rounded-md hover:bg-cyan-400">Login</button>
+                    <button onClick={handleLogin} type="submit" className="text-white bg-cyan-500 w-80 h-9 rounded-md hover:bg-cyan-400">Login</button>
                    </div>
                    <div className=" pt-2  pr-8 ">
                     <p className="text-gray-200 font-light font-serif">Need an account?<a className="text-blue-400 hover:underline"  href="Register">Register</a></p>
