@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from 'react'
+import React, { useState, useEffect  } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -6,30 +6,72 @@ import Home from './Component/Home'
 import Product from "./Component/Product"
 import Cart from "./Component/Cart"
 import Purchase from './Component/Purchase'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Login from './Component/Login';
 import Register from './Component/Register'
 import Test from './Component/Test'
-function App() {
+import ForgetPassword from './Component/ForgetPassword'
+import axios from 'axios'
+
+// Create a wrapper component that uses useLocation
+function AppContent() {
   const [logging, setLogging] = useState(false)
-  const[dark, setDark ] = useState("dark")
+  const [purchaseData, setPurchaseData] = useState([])
+  const location = useLocation()
+  
+  console.log("this is the location", location.pathname)
+  //deleting data on purchase of not purchasing 
+  useEffect(() => 
+  {
+    const fetchData  = async () => 
+    {
+      await axios.get("http://localhost:8000/purchase")
+      .then((res) => setPurchaseData(res.data))
+
+
+      purchaseData.map(async (data) => 
+      {
+        console.log("this is dataId ", data.purchaseId)
+        console.log("this is the location ", location.pathname)
+        if(location.pathname === "/Purchase")
+        {
+          return console.log("Do not delete data")
+        }
+        else{
+          return await axios.delete(`http://localhost:8000/purchase/delete/${data.purchaseId}`)
+          .then((res) => console.log(res,data))
+        }
+
+      })
+      setLogging(true)
+
+    }
+    fetchData()
+  },[logging])
+  
   return (
-    <>
-    <div className=" w-screen">
-      <BrowserRouter>
-        <Routes basename="/school-project">
-          <Route index path="school-project/" element={<Login/>}/>
-          <Route path="school-project/schoolHome" element={<Home/>}/>
-          <Route path="school-project/schoolProducts" element={<Product/>}/>
-          <Route path="school-project/schoolCart" element={<Cart/>}/>
-          <Route path="school-project/Purchase" element={<Purchase/>}/>
-          <Route path="school-project/Login" element={<Login/>}/>
-          <Route path="school-project/Register" element={<Register/>}/>
-          <Route path="school-project/Test" element={<Test/>}/>
-        </Routes>
-      </BrowserRouter>
+    <div className="w-screen">
+      <Routes>
+        <Route index path="/" element={<Login/>}/>
+        <Route path="/schoolHome" element={<Home/>}/>
+        <Route path="/schoolProducts" element={<Product/>}/>
+        <Route path="/schoolCart" element={<Cart/>}/>
+        <Route path="/Purchase" element={<Purchase/>}/>
+        <Route path="/Login" element={<Login/>}/>
+        <Route path="/Register" element={<Register/>}/>
+        <Route path="/Test" element={<Test/>}/>
+        <Route path="/ForgetPassword" element={<ForgetPassword/>}/>
+      </Routes>
     </div>
-    </>
+  )
+}
+
+// Main App component
+function App() {
+  return (
+    <BrowserRouter basename="/school-project">
+      <AppContent />
+    </BrowserRouter>
   )
 }
 

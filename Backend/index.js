@@ -8,6 +8,9 @@ import bcrypt from 'bcrypt'
 import Customer from './Queries/Customer.js'
 import Login from './Queries/Login.js'
 import Mpesa from './Queries/Mpesa.js'
+import Parse from 'parse';
+import Gmail from './Api/Gmail.js'
+
 dotenv.config()
 const port = process.env.PORT
 
@@ -25,6 +28,13 @@ const login = Login()
 app.use("/Logins", login)
 const mpesa = Mpesa() 
 app.use("/Mpesa", mpesa)
+const gmail = Gmail()
+app.use("/gmail", gmail)
+app.use(express.static("Public"))
+
+
+Parse.initialize("uzFQD9pOim0aPi1ZT4wDPtpcjASCGWSegKWS2LKe","5T1vqYTWNytcXRGndQdEHKFaYfnLgXW6rMKr5q6l"); 
+Parse.serverURL = "https://parseapi.back4app.com/";
 
 
 const db = mysql2.createConnection({

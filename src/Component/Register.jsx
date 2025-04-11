@@ -72,9 +72,20 @@ function Register()
         catch{ 
             console.log("error posting")
         }
-
       
     }
+    const handleEmail  = async ()=> 
+        {
+            await axios.post("http://localhost:8000/gmail/posts", 
+                {
+                    to:email, 
+                    subject:"Welcome to Bloo", 
+                    text:"We offer great prices", 
+                    html:`<h1>Shop with us ${username} to win points</h1>`
+                }
+            )
+            .then((res) => console.log(res.data))
+        }
     return(
         <>
             <div className=" bg-no-repeat bg-cover inset-0 h-screen w-screen bg-center absolute bg-[url(https://images.unsplash.com/photo-1567958451986-2de427a4a0be?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)]">
@@ -82,7 +93,7 @@ function Register()
             <div className="flex text-cyan-600 pr-96  pl-8">
                     <h1 className="font-bold font-serif text-3xl text-cyan-600 ">Bloo</h1><FaOpencart  className="w-16 h-12"/>
             </div>
-                <div className="relative flex items-center justify-center  w-screen">
+                <div className="absolute flex items-center justify-center  w-screen">
                     <div className="bg-gray-800 h-[38.6rem] w-1/2 rounded-md">
                         <h2 className="text-center font-semibold font-serif text-gray-300 text-4xl pt-2">Register</h2>
                         <TypeAnimation className="text-gray-200 font-serif "
@@ -147,7 +158,7 @@ function Register()
                                 placeholder="phone Number"  value={phoneNumber}  onChange={e => setPhoneNumber(e.target.value)}/>
                             </div>
                             <div className="pt-4">
-                                <button className="w-[38rem] h-10 text-white font-serif rounded-md bg-cyan-500 hover:bg-cyan-400"  type="submit">Submit</button>
+                                <button onClick={handleEmail} className="w-[38rem] h-10 text-white font-serif rounded-md bg-cyan-500 hover:bg-cyan-400"  type="submit">Submit</button>
                             </div>
                             <div className="pt-2">
                                 <p className="text-gray-200 font-serif text-xs">By registering to Bloo you have agreed to <i className="text-blue-400 hover:underline">Terms and services</i> </p>

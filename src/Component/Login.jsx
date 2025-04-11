@@ -122,7 +122,7 @@ function Login()
                     </div>
                    }
                    <div className="pt-2 pr-10">
-                    <a className="pr-12 text-blue-400 hover:underline">Forgot Password?</a>
+                    <a  href="ForgetPassword" className="pr-12 text-blue-400 hover:underline">Forgot Password?</a>
                    </div>
                    <div className="pl-4 pt-4">
                     <button onClick={handleLogin} type="submit" className="text-white bg-cyan-500 w-80 h-9 rounded-md hover:bg-cyan-400">Login</button>

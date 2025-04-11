@@ -43,11 +43,6 @@ const Purchase = () =>
             type: DataTypes.STRING, 
             allowNull: false
         }, 
-        phoneNumber:
-        {
-            type: DataTypes.STRING, 
-            allowNull: false
-        }
     },
     {
         tableName:"Purchased", 

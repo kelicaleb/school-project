@@ -40,3 +40,7 @@ CREATE TABLE Login
     phoneNumber VARCHAR(20)
 ); 
 DELETE FROM Purchased;
+ALTER TABLE Purchased
+DROP COLUMN phoneNumber;
+SELECT * FROM Customer; 
+DELETE FROM Customer; 

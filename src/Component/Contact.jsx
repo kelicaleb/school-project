@@ -44,6 +44,15 @@ function Contact(){
                         <li className="pt-2 hover:text-cyan-500 hover:underline">Account</li>
                         <li className="pt-2 hover:text-cyan-500 hover:underline">Help Center</li>
                     </ul>
+                    <h1 className="text-white underline pt-2">Devs Team</h1>
+                    <ul className="font-serif text-white">
+                        <li> Caleb Keli</li>
+                        <li> Derrrick</li>
+                        <li>Asava</li>
+                        <li>Brandon</li>
+                        <li>Denis Nkarachia</li>
+
+                    </ul>
                 </div>
             </div>
             <div className="relative flex items-center justify-center pl-12 pt-8 space-x-11 ">

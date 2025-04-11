@@ -81,6 +81,7 @@ function Purchase()
                 Product:"Mens"
 
             })
+       
 
     }
      return(
@@ -90,7 +91,7 @@ function Purchase()
             data.map(data => 
                 <>
                  <div>
-                <h1 className="text-3xl font-serif font-bold text-white pt-2">Purchase {phoneNumber}</h1>
+                <h1 className="text-3xl font-serif font-bold text-white pt-2">Purchase</h1>
                 <div>
                     <form onSubmit={handleSubmit}> 
                         <div className="relative flex pt-6 items-center justify-center "> 

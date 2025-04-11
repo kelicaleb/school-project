@@ -88,8 +88,8 @@ customer.post("/posts",async (req, res) =>
 
     }
     catch{
-        console.log("Error posting data")
-        return res.status(500).json({message: "Error posting data"})
+        console.log("Error posting data to Customer")
+        return res.status(500).json({message: "Error posting data to Customer"})
     }
 })
 customer.post("/login", async(req, res) => 

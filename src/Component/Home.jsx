@@ -173,18 +173,18 @@ function Home()
           </div>
         </div>
         <div>
-            <div className='py-2 group  ml-[10rem]'>
+            <div className='py-2 group  ml-[8rem]'>
             <div className="  w-screen">
-                <img className="h-[17rem] w-[20rem] bg-slate-900" src={slides[currentIndex].url} alt="slide" />
+                <img className="h-[19rem] w-[27rem] bg-slate-900" src={slides[currentIndex].url} alt="slide" />
             </div>
-          <div className='hidden group-hover:block absolute top-[20rem] translate-x-0 translate-y-[-50%] left-[25rem] text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+          <div className='hidden group-hover:block absolute top-[20rem] translate-x-0 translate-y-[-50%] left-[21rem] text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
             <BsChevronCompactLeft onClick={prevSlide} size={30} />
           </div>
           {/* Right Arrow */}
-          <div className='hidden group-hover:block absolute top-[20rem] -translate-x-0 translate-y-[-50%] right-[25rem] text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+          <div className='hidden group-hover:block absolute top-[20rem] -translate-x-0 translate-y-[-50%] right-[27rem] text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
             <BsChevronCompactRight onClick={nextSlide} size={30} />
           </div>
-          <div className=' pl-[10rem] flex top-4 justify-center py-2 pt-12'>
+          <div className=' pl-[14rem] flex top-4 justify-center py-2 pt-12'>
             {slides.map((slide, slideIndex) => (
               <div
                 key={slideIndex}
@@ -196,7 +196,7 @@ function Home()
             ))}
           </div>
           <div className="">
-          <FaOpencart  className="w-[20rem] h-[2rem] pl-12 text-cyan-600 dark:text-violet-600"/>
+          <FaOpencart  className="w-[20rem] h-[2rem] pl-28 text-cyan-600 dark:text-violet-600"/>
           </div>
         </div> 
         </div>
