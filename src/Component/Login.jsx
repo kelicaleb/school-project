@@ -95,6 +95,7 @@ function Login()
     }
     const handleForgetPassword  = () => 
     {
+        localStorage.setItem("username", username)
         const  searchByUsername = login.filter((data) => 
         
         {
@@ -139,7 +140,7 @@ function Login()
                               padding: 20px;
                             }
                             .header {
-                              background-color: #4285f4;
+                              background-color: #06b6d4;
                               color: white;
                               padding: 20px;
                               text-align: center;
@@ -172,16 +173,15 @@ function Login()
                             </div>
                             <div class="content">
                               <p>Hello ${username || 'there'},</p>
-                              <p>We're confirming that your password was recently changed.</p>
+                              <p>We're confirming that your password needs to be changed.</p>
                               <p>If you made this change, no further action is required.</p>
-                              <p>If you did not request this password change, please secure your account immediately:</p>
-                              <a href="" class="button">Secure My Account</a>
-                              <p>If you have any questions or concerns, don't hesitate to contact our support team.</p>
-                              <p>Thank you,<br>Your Company Name</p>
+                              <p>Click the button below to perform the password change:</p>
+                              <a href="https://kelicaleb.github.io/school-project/ForgetPassword" class="button">Change password</a>
+                              <p>Thank you,<br> From Bloo</p>
                             </div>
                             <div class="footer">
                               <p>This is an automated message, please do not reply directly to this email.</p>
-                              <p>© 2025 Your Company Name. All rights reserved.</p>
+                              <p>© 2025 Bloo. All rights reserved.</p>
                             </div>
                           </div>
                         </body>

@@ -43,4 +43,6 @@ DELETE FROM Purchased;
 ALTER TABLE Purchased
 DROP COLUMN phoneNumber;
 SELECT * FROM Customer; 
-DELETE FROM Customer; 
+DELETE FROM Customer;
+ALTER TABLE Customer
+MODIFY COLUMN password VARCHAR(200) NOT NULL;   

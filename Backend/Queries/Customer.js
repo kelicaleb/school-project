@@ -122,6 +122,25 @@ customer.post("/login", async(req, res) =>
         return res.status(500).json({logging:false})
     }
 })
+//updating Password
+customer.patch("/updatepassword", async (req, res) => 
+{
+    try{
+        const{username, password} = req.body
+        const salt = await bcrypt.genSalt(10)
+        const hash = await bcrypt.hash(password, salt)
+        const updatePassword  = await Customers.update({password:hash},{
+            where:{
+                username: username
+            }
+        })
+        return res.status(200).json(updatePassword)
+    }
+    catch{
+        console.log("Error posting data")
+        return res.status(500).json({message:"Error posting data"})
+    }
+})
 
     return customer 
 }
