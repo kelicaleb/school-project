@@ -12,6 +12,8 @@ import Register from './Component/Register'
 import Test from './Component/Test'
 import ForgetPassword from './Component/ForgetPassword'
 import axios from 'axios'
+import Admin from './Admin/AdminLogin'
+import AdminHome from './Admin/AdminHome'
 
 // Create a wrapper component that uses useLocation
 function AppContent() {
@@ -61,6 +63,8 @@ function AppContent() {
         <Route path="/Register" element={<Register/>}/>
         <Route path="/Test" element={<Test/>}/>
         <Route path="/ForgetPassword" element={<ForgetPassword/>}/>
+        <Route path="/Admin" element={<Admin/>}/>
+        <Route path="/AdminHome" element={<AdminHome/>}/>
       </Routes>
     </div>
   )

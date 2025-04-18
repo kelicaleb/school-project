@@ -62,15 +62,16 @@ function Purchase()
     }
     const handlePurchase = async(data) => 
     {
+    try{
         setNotification(true)
         console.log(data)
      
         setHeight("28rem")
         await axios.post("http://localhost:8000/transaction/post", 
             {
+                customerId:localStorage.getItem("customerId"),
                 amount:amount,
                 price: data.price, 
-                customerId:1
             }
         )
         .then((res) => console.log(res.data))
@@ -81,6 +82,11 @@ function Purchase()
                 Product:"Mens"
 
             })
+    }
+    catch{
+        console.log("Error Purchasing")
+
+    }
        
 
     }

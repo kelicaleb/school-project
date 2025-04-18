@@ -6,7 +6,21 @@ export default {
   ],
   darkMode:"class",
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        moveBackground: 'moveBackground 10s linear infinite',
+      },
+      keyframes: {
+        moveBackground: {
+          '0%': {
+            transform: 'translateX(0)',
+          },
+          '100%': {
+            transform: 'translateX(-100%)',
+          },
+        },
+      },
+    },
   },
   plugins: [],
 }

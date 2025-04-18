@@ -45,4 +45,37 @@ DROP COLUMN phoneNumber;
 SELECT * FROM Customer; 
 DELETE FROM Customer;
 ALTER TABLE Customer
-MODIFY COLUMN password VARCHAR(200) NOT NULL;   
+MODIFY COLUMN password VARCHAR(200) NOT NULL;  
+SHOW DATABASES; 
+CREATE TABLE Admin(
+    adminId INT PRIMARY KEY UNIQUE AUTO_INCREMENT, 
+    username VARCHAR(20) UNIQUE,
+    password VARCHAR(200) 
+);
+
+DROP TABLE Admin;
+SHOW TABLES;
+SELECT * FROM transactions; 
+DELETE FROM transactions;
+ALTER TABLE transactions
+DROP COLUMN purchaseId; 
+SELECT * FROM Customer
+INNER JOIN transactions ON Customer.customerId = transactions.customerId;
+
+DROP TABLE transactions;
+CREATE TABLE transactions(
+    transactionId INT UNIQUE AUTO_INCREMENT, 
+    customerId INT,
+    amount INT,
+    item VARCHAR(20), 
+    method VARCHAR(20), 
+    status VARCHAR(20) DEFAULT "Pending", 
+    FOREIGN KEY (customerId ) REFERENCES Customer(customerId)
+);
+SELECT * FROM transactions;
+ALTER TABLE Login 
+ADD COLUMN customerId INT; 
+SELECT * FROM Login; 
+DROP TABLE Login; 
+SELECT transactionId, username, item, amount, method, status FROM Customer
+LEFT JOIN transactions ON Customer.customerId = transactions.customerId;

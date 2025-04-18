@@ -10,6 +10,7 @@ import Login from './Queries/Login.js'
 import Mpesa from './Queries/Mpesa.js'
 import Parse from 'parse';
 import Gmail from './Api/Gmail.js'
+import AdminLogin from './Admin/AdminLogin.js'
 
 dotenv.config()
 const port = process.env.PORT
@@ -31,6 +32,9 @@ app.use("/Mpesa", mpesa)
 const gmail = Gmail()
 app.use("/gmail", gmail)
 app.use(express.static("Public"))
+//login admin
+const admin = AdminLogin()
+app.use('/adminLogin', admin)
 
 
 Parse.initialize("uzFQD9pOim0aPi1ZT4wDPtpcjASCGWSegKWS2LKe","5T1vqYTWNytcXRGndQdEHKFaYfnLgXW6rMKr5q6l"); 

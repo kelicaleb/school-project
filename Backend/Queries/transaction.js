@@ -21,23 +21,29 @@ const Transaction = () =>
                 primaryKey: true,
                 autoIncrement:true 
             }, 
-            amount:{
+            customerId:{
                 type:DataTypes.INTEGER, 
                 allowNull: false, 
 
             },
-            price:
+            amount:
             {
                 type: DataTypes.DECIMAL, 
                 allowNull: false
             },  
-            customerId:
+            item:
             {
-                type: DataTypes.DECIMAL, 
+                type: DataTypes.STRING, 
                 allowNull: false
             },
-            purchaseId:{
-                type: DataTypes.INTEGER
+            method:{
+                type: DataTypes.STRING, 
+                allowNull:false 
+            }, 
+            status:
+            {
+                type: DataTypes.STRING, 
+                allowNull:true
             }
         },
         {
@@ -64,12 +70,10 @@ const Transaction = () =>
     transaction.post("/post", async(req, res) => 
     {
         try{
-            const {amount, price, customerId }  = req.body
+            const {customerId, amount, item, method }  = req.body
             const inserts = await Transactions.create(
                 {
-                    amount, 
-                    price, 
-                    customerId 
+                    customerId, amount, item, method 
                 }
             )
             return res.status(200).json(inserts)

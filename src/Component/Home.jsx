@@ -24,7 +24,6 @@ import Contact from './Contact'
 function Home()
 {
     const[login, setLogin ] = useState([])
-    const[gender, setGender ] = useState('')
     const[checkGender, setCheckGender] = useState(false)
     const[trigger, setTrigger ]= useState(0)
     const [count, setCount] = useState(true)
@@ -51,7 +50,9 @@ function Home()
         else{
           setCheckGender(false)
         }
-        setUsername(data.username)
+        localStorage.setItem("username", data.username)
+        setUsername(localStorage.getItem("username"))
+        localStorage.setItem("customerId", data.customerId)
         
       })
 

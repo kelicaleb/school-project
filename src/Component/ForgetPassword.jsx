@@ -26,7 +26,7 @@ function ForgetPassword()
         if(timer){
             const tick = setInterval(startTimer, 1000)
             console.log(clock)
-            if(clock == 6)
+            if(clock == 5)
             {
                 window.location.href = "Login"
             }
@@ -50,7 +50,7 @@ function ForgetPassword()
             )
             .then((res) => console.log(res.data))
             setTimer(true)
-            toast.success("Redirecting to Login");
+            toast.success("Redirecting to Login...");
         }
         catch{
             setTimer(false)

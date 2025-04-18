@@ -4,7 +4,7 @@ import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
 import { MdError } from "react-icons/md";
 import { ToastContainer, toast } from 'react-toastify';
-import Email from './Email'
+import { FaOpencart } from "react-icons/fa";
 
 
 
@@ -196,17 +196,20 @@ function Login()
         
     
     }
-    const handleLink = () => 
-    {
-        window.location.href = "http://localhost:5173/school-project/ForgetPassword"
-    }
+
        
     return(
         <>
-
             <div className="h-screen w-screen bg-cover bg-no-repeat bg-center absolute inset-0   bg-[url(https://images.unsplash.com/photo-1555529771-122e5d9f2341?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)]">
             <ToastContainer/>
-            <div className="relative flex items-center justify-center pt-40 ">
+           <div className="flex">
+            <div className="flex text-cyan-500 pl-5"><h1 className="font-bold font-serif text-3xl text-cyan-500 ">Bloo</h1><FaOpencart  className="w-16 h-12"/>
+            </div>
+           <div className="pt-2 pl-[68rem]">
+              <a href="Admin" className="text-[1.5rem] hover:text-cyan-500 text-cyan-600 font-serif font-bold ">Admin</a>
+            </div>
+           </div>
+            <div className="relative flex items-center justify-center pt-[7rem] ">
             <div className=" bg-gray-800  w-96 pt-2 rounded-lg" style={{height:`${height}`}}>
                 <form onSubmit={handleSubmit}>
                     <h1 className="text-2xl text-white font-serif font-bold">Welcome Back!</h1>
