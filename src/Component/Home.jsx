@@ -53,6 +53,8 @@ function Home()
         localStorage.setItem("username", data.username)
         setUsername(localStorage.getItem("username"))
         localStorage.setItem("customerId", data.customerId)
+        const customerId = localStorage("customerId")
+        console.log("thiis in scusromerId", customerId)
         
       })
 

@@ -79,3 +79,8 @@ SELECT * FROM Login;
 DROP TABLE Login; 
 SELECT transactionId, username, item, amount, method, status FROM Customer
 LEFT JOIN transactions ON Customer.customerId = transactions.customerId;
+SELECT * FROM Customer;
+DELETE FROM transactions;
+DELETE FROM Login;
+DELETE FROM Customer;
+DELETE FROM Login;

@@ -14,6 +14,7 @@ const Transaction = () =>
         }
     )
 
+
     const Transactions  = sequelize.define("Transactions", 
         {
             transactionId:{
@@ -28,7 +29,7 @@ const Transaction = () =>
             },
             amount:
             {
-                type: DataTypes.DECIMAL, 
+                type: DataTypes.INTEGER, 
                 allowNull: false
             },  
             item:
@@ -71,9 +72,10 @@ const Transaction = () =>
     {
         try{
             const {customerId, amount, item, method }  = req.body
+            let status = "Pending"
             const inserts = await Transactions.create(
                 {
-                    customerId, amount, item, method 
+                    customerId, amount, item, method, status
                 }
             )
             return res.status(200).json(inserts)

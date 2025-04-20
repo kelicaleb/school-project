@@ -15,6 +15,7 @@ function Purchase()
     const [phoneNumber, setPhoneNumber ] = useState('')
     const[login, setLogin ] = useState([])
     const [username, setUsername ] = useState('')
+    const [method, setMethod] = useState('Mpesa')
 
 
 
@@ -62,16 +63,23 @@ function Purchase()
     }
     const handlePurchase = async(data) => 
     {
+        console.log("this is the purchase", method)
+        const total = parseInt(amount) * parseInt(data.price)
+        console.log("this is the total", total)
     try{
         setNotification(true)
-        console.log(data)
+        console.log("this is data", amount * parseInt(data.price))
+        console.log("this is customerId", localStorage.getItem("customerId"))
      
         setHeight("28rem")
         await axios.post("http://localhost:8000/transaction/post", 
             {
-                customerId:localStorage.getItem("customerId"),
-                amount:amount,
-                price: data.price, 
+                customerId:parseInt(localStorage.getItem("customerId")),
+                amount:total,
+                item:data.title.slice(0,19), 
+                method:method
+
+                
             }
         )
         .then((res) => console.log(res.data))
@@ -113,8 +121,9 @@ function Purchase()
                         </div>
                         <div className="pt-2">
                             <p className="pt-2 font-serif pr-[15rem] text-white font-semibold">Payment:</p>
-                            <select className="bg-slate-950 rounded-md h-[2rem] w-[20rem] text-white font-serif text-center"  onChange={e =>setPurchase(e.target.value)} >
+                            <select className="bg-slate-950 rounded-md h-[2rem] w-[20rem] text-white font-serif text-center" value={method} onChange={e =>setMethod(e.target.value)} >
                                 <option value="Mpesa">Mpesa</option>
+                                <option value="Cash">Cash</option>
                             </select>
                         </div>
                         {

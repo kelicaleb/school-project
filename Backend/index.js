@@ -11,6 +11,7 @@ import Mpesa from './Queries/Mpesa.js'
 import Parse from 'parse';
 import Gmail from './Api/Gmail.js'
 import AdminLogin from './Admin/AdminLogin.js'
+import TableTransaction from './Admin/TableTransaction.js'
 
 dotenv.config()
 const port = process.env.PORT
@@ -35,6 +36,9 @@ app.use(express.static("Public"))
 //login admin
 const admin = AdminLogin()
 app.use('/adminLogin', admin)
+//Table transaction middel ware 
+const tableTransaction = TableTransaction()
+app.use("/tableTransaction", tableTransaction)
 
 
 Parse.initialize("uzFQD9pOim0aPi1ZT4wDPtpcjASCGWSegKWS2LKe","5T1vqYTWNytcXRGndQdEHKFaYfnLgXW6rMKr5q6l"); 
