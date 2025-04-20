@@ -84,3 +84,4 @@ DELETE FROM transactions;
 DELETE FROM Login;
 DELETE FROM Customer;
 DELETE FROM Login;
+DELETE FROM Customer WHERE customerId = 21;

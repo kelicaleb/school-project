@@ -130,7 +130,7 @@ function Home()
         {
             clearInterval(transition)
         })
-    }, [currentIndex])
+    })
     
   
    

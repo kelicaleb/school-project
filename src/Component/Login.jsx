@@ -17,6 +17,8 @@ function Login()
     const [height, setHeight ] = useState('420px')
     const [login, setLogin ] = useState([])
     const [sendGender, setSendGender ] = useState(true)
+    const [control, setControl ] = useState(true)
+    const [newData, setNewData ] = useState([])
  
 
 
@@ -26,32 +28,23 @@ function Login()
     {
         await axios.get("http://localhost:8000/customer")
         .then((res) => setLogin(res.data))
-       
+        return setControl(false)
         
     }
     fetchData()
-},[])
+},[control])
     
 
  
   
    const handleLogin = async () => 
-    {
-      const gender = login.filter((data) => {
-        return data && data.username && data.username.toLowerCase().includes(username)
-       })
-       console.log("hello", gender)
-       gender.map((data) => 
-      {
-        console.log("this is customerId",data.phoneNumber)
-      })
-      
-       
+    {      
      try{    
         const gender = login.filter((data) => {
          return data && data.username && data.username.toLowerCase().includes(username)
         })
-        console.log(gender)
+        setNewData(gender)
+        console.log(newData)
        
         gender.map( async (data ) => 
      {
