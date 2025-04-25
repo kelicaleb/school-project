@@ -24,8 +24,8 @@ const AdminNavbar = () => {
             <Link to="/AdminHome" className="font-semibold font-serif text-white hover:text-cyan-500 transition-colors duration-200">
               Home
             </Link>
-            <Link to="/about" className="font-semibold font-serif text-white hover:text-cyan-500 transition-colors duration-200">
-              About
+            <Link to="/AdminProducts" className="font-semibold font-serif text-white hover:text-cyan-500 transition-colors duration-200">
+              Products
             </Link>
             <Link to="/services" className="font-semibold font-serif text-white hover:text-cyan-500 transition-colors duration-200">
               Services

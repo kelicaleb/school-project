@@ -155,7 +155,7 @@ function Register()
                             <div className="pt-1">
                                 <p className="font-serif font-semibold pr-[30rem] text-gray-200">Phone Number:</p>
                                 <input required className="text-center font-serif rounded-md h-10 w-[38rem] bg-slate-900 text-white" type="text" 
-                                placeholder="phone Number"  value={phoneNumber}  onChange={e => setPhoneNumber(e.target.value)}/>
+                                placeholder="2547XXXXXXXX"  value={phoneNumber}  onChange={e => setPhoneNumber(e.target.value)}/>
                             </div>
                             <div className="pt-4">
                                 <button onClick={handleEmail} className="w-[38rem] h-10 text-white font-serif rounded-md bg-cyan-500 hover:bg-cyan-400"  type="submit">Submit</button>

@@ -85,7 +85,7 @@ function Purchase()
         .then((res) => console.log(res.data))
         await axios.post("http://localhost:8000/Mpesa/post", 
             {
-                Amount:parseInt(data.price) * amount, 
+                Amount:parseInt(data.price) * parseInt(amount), 
                 PhoneNumber:phoneNumber,
                 Product:"Mens"
 

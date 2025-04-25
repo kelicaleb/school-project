@@ -28,7 +28,7 @@ gmail.post("/posts", async (req, res) =>
     const{to, subject, text, html} = req.body 
     const send = {
       from:"Bloo", 
-      to, 
+      to,
       subject, 
       text, 
       html

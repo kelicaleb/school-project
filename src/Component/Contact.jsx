@@ -46,11 +46,12 @@ function Contact(){
                     </ul>
                     <h1 className="text-white underline pt-2">Devs Team</h1>
                     <ul className="font-serif text-white">
-                        <li> Caleb Keli</li>
-                        <li> Derrrick</li>
-                        <li>Asava</li>
-                        <li>Brandon</li>
-                        <li>Denis Nkarachia</li>
+                        <li className="hover:text-cyan-500"> <a href="https://kelicaleb.github.io/portfolio/">CalebKeli</a></li>
+                        <li className="hover:text-cyan-500"> Derrick</li>
+                        <li className="hover:text-cyan-500">Asava</li>
+                        <li className="hover:text-cyan-500">Brandon</li>
+                        <li className="hover:text-cyan-500"><a href="https://fireship.io/">Denis Nkarachia</a></li>
+                        <li className="hover:text-cyan-500"><a href="https://fireship.io/">Dave</a></li>
 
                     </ul>
                 </div>
