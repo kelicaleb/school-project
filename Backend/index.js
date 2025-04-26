@@ -33,7 +33,7 @@ const mpesa = Mpesa()
 app.use("/Mpesa", mpesa)
 const gmail = Gmail()
 app.use("/gmail", gmail)
-app.use(express.static("Public"))
+app.use(express.static("public"))
 //login admin
 const admin = AdminLogin()
 app.use('/adminLogin', admin)

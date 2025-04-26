@@ -14,7 +14,7 @@ import ForgetPassword from './Component/ForgetPassword'
 import axios from 'axios'
 import Admin from './Admin/AdminLogin'
 import AdminHome from './Admin/AdminHome'
-import AdminProducts from './Admin/AdminProducts'
+import AdminProducts from './Admin/AdminProduct'
 
 // Create a wrapper component that uses useLocation
 function AppContent() {
