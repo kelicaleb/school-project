@@ -91,14 +91,17 @@ const AdminProduct = () => {
         </div>
         <div className="pt-2">
           <p className="font-serif font-semibold pt-2 pr-[24rem] text-white ">Category:</p>
-          <input
-          className=" bg-white/40 w-[30rem] h-9 placeholder-white text-center rounded-md "
-          placeholder="Category"
-            type="text"
-            id="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            required />
+        <select
+        className="w-[30rem] h-9 rounded-md items-center justify-center text-center bg-white/30 text-white"
+        value={category}
+        onChange={e => e.target.value}
+        >
+          <option className="font-serif font-semibold text-white" value="maleClothes"> Male Clothes </option>
+          <option className="font-serif font-semibold text-white" value="femaleClothes"> Male Clothes </option>
+          <option className="font-serif font-semibold text-white" value="jewelry"> Male Clothes </option>
+          <option className="font-serif font-semibold text-white" value="technology"> Male Clothes </option>
+
+        </select>
         </div>
         <div className="pt-2">
           <p className="font-serif font-semibold pt-2 pr-[22rem] text-white">Stock Quantity:</p>
