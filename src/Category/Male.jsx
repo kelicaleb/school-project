@@ -36,7 +36,7 @@ function Male({male}) {
   return (
     <div className="w-full relative py-8 top-12 pr-2 ">
       <div className="w-[75rem] h-12 bg-cyan-500 rounded-md ">
-        <h1 className="font-serif text-white text-center pt-1 font-bold text-3xl">Technology</h1>
+        <h1 className="font-serif text-white text-center pt-1 font-bold text-2xl">Male Clothes</h1>
       </div>
       <div className="relative">
         {showLeftButton && (
@@ -50,7 +50,7 @@ function Male({male}) {
         
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto gap-4   scrollbar-hide snap-x"
+          className="flex overflow-x-auto gap-10   scrollbar-hide snap-x"
           onScroll={handleScroll}
         >
           {male.map((item) => (
@@ -58,7 +58,7 @@ function Male({male}) {
               key={item.cartId}
               className={`flex-shrink-0 w-64 h-64  rounded-lg flex items-center justify-center snap-start`}
             >
-              <img className="h-[15rem] w-[15rem]"src={`http://localhost:8000${item.image}`}  />
+              <img className="h-[12rem] w-[12rem]"src={`http://localhost:8000${item.image}`}  />
               </div>
           ))}
         </div>

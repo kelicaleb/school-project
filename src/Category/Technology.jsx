@@ -36,7 +36,7 @@ function Technology({technology}) {
   return (
     <div className="w-full relative py-8 top-12 pr-2 ">
       <div className="w-[75rem] h-12 bg-cyan-500 rounded-md ">
-        <h1 className="font-serif text-white text-center pt-1 font-bold text-3xl">Technology</h1>
+        <h1 className="font-serif text-white text-center pt-1 font-bold text-2xl">Technology</h1>
       </div>
       <div className="relative">
         {showLeftButton && (

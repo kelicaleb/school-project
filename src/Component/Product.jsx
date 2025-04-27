@@ -25,15 +25,21 @@ function Product()
             try{
                 await axios.get("http://localhost:8000/Products/api/products")
             .then((res) => setProducts(res.data))
+            console.log("these is products", products)
+            //for setting female products
             const womenClothes = products.filter((data) => 
             {
-                return data && data.category &&  data.cataegory.toLowerCase().includes("femaleClothes")
+                return data && data.category &&  data.category.toLowerCase().includes("female")
             })
             setFemaleClothes(womenClothes)
+            console.log("This is the female clothes", femaleClothes)
+            //For Setting male clothes 
             const menClothes = products.filter((data) => {
-                return data && data.category && data.category.toLowerCase().includes("maleClothes")
+                return data && data.category && data.category.toLowerCase().includes("maleclothes")
             })
+            console.log("show me the menClothes", menClothes)
             setMaleClothes(menClothes)
+            console.log("This is the male clothes from products", maleClothes)
             const jewel = products.filter((data) => {
                 return data && data.category && data.category.toLowerCase().includes("jewelry")
             })
@@ -52,7 +58,7 @@ function Product()
             }
         }
         fetchData()
-    },[fetchedData])
+    },[products.length])
     
 return(
     <>

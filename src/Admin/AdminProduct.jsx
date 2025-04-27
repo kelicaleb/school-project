@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminNavbar from './AdminNavbar'
 import axios from 'axios';
 import { TiTick } from "react-icons/ti";
@@ -7,13 +7,43 @@ import { FaMixer } from "react-icons/fa6";
 const AdminProduct = () => {
   const [serialNumber, setSerialNumber] = useState('');
   const [item, setItem] = useState('');
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState('maleClothes');
   const [stock, setStock] = useState('');
   const [image, setImage] = useState(null);
   const [height, setHeight ] = useState("33rem")
   const [notification, setNotification ] = useState()
   const [success, setSucess]= useState("")
   const [icon, setIcon ] = useState()
+  const [tick, setTick ] = useState(0)
+  const [start, setStart ] = useState(false)
+
+
+  const clock = () => 
+  {
+    setTick(prevCount => prevCount + 1)
+  }
+  useEffect( () => 
+    {
+      if(start){
+        const startCount = setInterval(clock, 1000)
+        if(tick == 2)
+        {
+          setStart(false)
+          setIcon(null)
+          console.log(tick)
+          setTick(0)
+          setSucess('')
+        }
+        return (() => 
+        {
+          clearInterval(startCount) 
+       
+        })
+      }
+     
+     
+    },[start, tick])
+  
 
   const handleFileChange = (event) => {
     setImage(event.target.files[0]);
@@ -42,6 +72,9 @@ const AdminProduct = () => {
         setSucess("Successfully sent")
         setNotification(true)
         setIcon(<TiTick className="text-green"/>)
+        console.log("this is start" , start)
+        setStart(true)
+
       } else {
         setErrorMessage('Failed to add product');
         setSuccessMessage('');
@@ -52,8 +85,11 @@ const AdminProduct = () => {
       setNotification(false)
       setIcon(<FaMixer/>)
       setSucess("Failed to post")
+      setStart(true)
     }
   };
+
+  
 
   return (
     <>
@@ -94,12 +130,12 @@ const AdminProduct = () => {
         <select
         className="w-[30rem] h-9 rounded-md items-center justify-center text-center bg-white/30 text-white"
         value={category}
-        onChange={e => e.target.value}
+        onChange={e => setCategory(e.target.value)}
         >
           <option className="font-serif font-semibold text-white" value="maleClothes"> Male Clothes </option>
-          <option className="font-serif font-semibold text-white" value="femaleClothes"> Male Clothes </option>
-          <option className="font-serif font-semibold text-white" value="jewelry"> Male Clothes </option>
-          <option className="font-serif font-semibold text-white" value="technology"> Male Clothes </option>
+          <option className="font-serif font-semibold text-white" value="female"> Female Clothes </option>
+          <option className="font-serif font-semibold text-white" value="jewelry">Jewelry </option>
+          <option className="font-serif font-semibold text-white" value="technology">Technology</option>
 
         </select>
         </div>
