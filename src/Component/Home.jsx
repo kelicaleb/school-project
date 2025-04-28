@@ -17,12 +17,19 @@ import { IoMdFlame } from "react-icons/io";
 import { GiHidden } from "react-icons/gi";
 import Display from './Slideshow'
 import Contact from './Contact'
+import Male from '../Category/Male'
+import {Link} from 'react-router-dom'
 
 
 
 
 function Home()
 {
+ 
+
+
+
+
     const[login, setLogin ] = useState([])
     const[checkGender, setCheckGender] = useState(false)
     const[trigger, setTrigger ]= useState(0)
@@ -53,7 +60,7 @@ function Home()
         localStorage.setItem("username", data.username)
         setUsername(localStorage.getItem("username"))
         localStorage.setItem("customerId", data.customerId)
-        const customerId = localStorage("customerId")
+        const customerId = localStorage.getItem("customerId")
         console.log("thiis in scusromerId", customerId)
         
       })
@@ -156,20 +163,24 @@ function Home()
         <div className=" bg-slate-800  h-[20rem] w-[14rem] rounded-md pl-1 pt-2">
           <div className="flex hover:text-cyan-500 w-[13rem] h-10 pt-1 text-white pl-2">
           <GiClothesline className="w-8 h-8 " />
-          <a className=" pr-12 font-serif text-sm pl-2 pt-2 font-semibold">Mens Clothes</a> 
-          </div>
+          <Link to="/schoolProducts#male" className="pr-12 font-serif text-sm pl-2 pt-2 font-semibold">
+          Mens Clothes
+          </Link>          </div>
           <div className="flex hover:text-cyan-500 w-[12rem] h-10 pt-3 text-white pl-2">
           <GrTechnology  className="w-6 h-6 " />
-          <a className=" pr-12 font-serif text-sm pl-2 pt-1 font-semibold">Technology</a> 
-          </div> 
+          <Link to="/schoolProducts#technology" className="pr-12 font-serif text-sm pl-2 pt-2 font-semibold">
+          Technology
+          </Link>             </div> 
           <div className="flex  hover:text-cyan-500 w-[13rem] h-10 pt-4 text-white ">
           <GiDress className="w-[2rem] h-8 " />
-          <a className=" pr-12 font-serif font-semibold text-sm  pt-2">Female Clothes</a> 
-          </div> 
+          <Link to="/schoolProducts#female" className="pr-12 font-serif text-sm pl-2 pt-2 font-semibold">
+          Female Clothes
+          </Link>             </div> 
           <div className="flex pl-2 hover:text-cyan-500 w-[12rem] h-10 pt-5 text-white">
           <GiJewelCrown className="w-6 h-6 pr-1" />
-          <a className=" pr-12 font-serif text-sm pl-1 pt-2 font-semibold">Jewellery</a> 
-          </div> 
+          <Link to="/schoolProducts#jewelry" className="pr-12 font-serif text-sm pl-2 pt-2 font-semibold">
+          Jewelry
+          </Link>             </div> 
           <div className="flex hover:text-cyan-500 w-[14rem] h-10 pt-6 text-white">
           <MdOutlineCategory className="w-[2rem] h-8 " />
           <a className=" pr-12 font-serif text-sm pl-2 pt-2 font-semibold">Other Categories</a> 

@@ -59,10 +59,20 @@ function Product()
         }
         fetchData()
     },[products.length])
+    useEffect(() => {
+        if (location.hash) {
+          const id = location.hash.replace("#", "");
+          const element = document.getElementById(id);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      });
     
 return(
     <>
     <Navbar/>
+    <a href="#male" className="text-cyan-500 pt-[22rem] text-5xl">Press me</a>
     <Female id="female" female={femaleClothes}/>
     <Jewelry id="jewelry" jewelry={jewelry}/> 
     < Male id="male"  male={maleClothes}/>

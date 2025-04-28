@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-function Female({female}) {
+function Female({id, female}) {
   const scrollContainerRef = useRef(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(true);
@@ -34,7 +34,7 @@ function Female({female}) {
   };
 
   return (
-    <div className="w-full relative py-8 top-12 pr-2 ">
+    <div id={id} className="w-full relative py-8 top-12 pr-2 ">
       <div className="w-[75rem] h-12 bg-cyan-500 rounded-md ">
         <h1 className="font-serif text-white text-center pt-1 font-bold text-2xl">Female Clothes</h1>
       </div>

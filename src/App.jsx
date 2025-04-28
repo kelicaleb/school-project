@@ -15,9 +15,12 @@ import axios from 'axios'
 import Admin from './Admin/AdminLogin'
 import AdminHome from './Admin/AdminHome'
 import AdminProducts from './Admin/AdminProduct'
+import Male from './Category/Male'
 
 // Create a wrapper component that uses useLocation
 function AppContent() {
+
+
   const [logging, setLogging] = useState(false)
   const [purchaseData, setPurchaseData] = useState([])
   const location = useLocation()
@@ -74,9 +77,17 @@ function AppContent() {
 
 // Main App component
 function App() {
+  let Component;
+  switch(window.location.pathname)
+  {
+    case"school-project/schoolProducts":
+    Component = <Product/>
+    break
+  }
   return (
     <BrowserRouter basename="/school-project">
       <AppContent />
+      {Component}
     </BrowserRouter>
   )
 }
