@@ -69,6 +69,10 @@ const Products = () => {
         stock: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        price:{
+            type:DataTypes.DECIMAL, 
+            allowNull:false
         }
     }, {
         tableName: "Goods",

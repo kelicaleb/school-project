@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import axios from 'axios'
 
 function Female({id, female}) {
   const scrollContainerRef = useRef(null);
@@ -11,7 +12,24 @@ function Female({id, female}) {
 {
     console.log("This is the female array", female)
 
-},[])
+},[female])
+const handleCart  = async(id) =>
+{
+  console.log(id)
+  const selectedItem = female.find((data) => data.productId === id)
+  console.log(selectedItem, "This is the selected item")
+  if(selectedItem) 
+  {
+    await axios.post("http://localhost:8000/cart", 
+      {
+        title:"Female Clothes", 
+        price:selectedItem.price, 
+        category: selectedItem.category, 
+        image:selectedItem.image
+      }
+    )
+  }
+}
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -34,8 +52,8 @@ function Female({id, female}) {
   };
 
   return (
-    <div id={id} className="w-full relative py-8 top-12 pr-2 ">
-      <div className="w-[75rem] h-12 bg-cyan-500 rounded-md ">
+    <div id={id}className="w-full relative py-8 top-12 pr-2 ">
+      <div className="w-[75rem] h-12 bg-cyan-500 rounded-md  ">
         <h1 className="font-serif text-white text-center pt-1 font-bold text-2xl">Female Clothes</h1>
       </div>
       <div className="relative">
@@ -50,16 +68,26 @@ function Female({id, female}) {
         
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto gap-10   scrollbar-hide snap-x"
+          className="flex overflow-x-auto gap-12   scrollbar-hide snap-x"
           onScroll={handleScroll}
         >
           {female.map((item) => (
-            <div 
-              key={item.cartId}
-              className={`flex-shrink-0 w-64 h-64  rounded-lg flex items-center justify-center snap-start`}
+            <>
+            <div className="items-center justify-center pt-10 h-[22rem]">
+            <div
+              key={item.productId}
+              className={`shadow-xl shadow-cyan-500 hover:shadow-cyan-400 hover:-translate-y-1 flex-shrink-0 w-64 h-[18rem]  rounded-lg  items-center justify-center snap-start`}
             >
-              <img className="h-[12rem] w-[12rem]"src={`http://localhost:8000${item.image}`}  />
-              </div>
+              <img className="h-[12rem] w-[13rem] pl-4" src={`http://localhost:8000${item.image} `} />
+              <p className="fonr-serif font-semibold">Price: Khs {item.price}</p>
+              <div className="pt-4 items-cneter justify-center pr-2">
+                <button onClick={() => handleCart(item.productId)} className="bg-cyan-600 h-9 hover:bg-cyan-500 w-[11rem] rounded-md text-white">Add Cart</button>
+              </div> 
+            </div>
+           
+
+            </div>
+           </>
           ))}
         </div>
         

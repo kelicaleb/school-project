@@ -65,9 +65,9 @@ db.connect((err) =>
 
 app.post("/cart", (req, res) => 
 {
-    const {title, price, formed, category, image} = req.body
-    const inserts = `INSERT INTO Cart(title, price, formed, category, image) VALUES(?,?,?,?,?)`
-    const values = [title, price, formed, category, image]
+    const {title, price,  category, image} = req.body
+    const inserts = `INSERT INTO Cart(title, price,  category, image) VALUES(?,?,?,?)`
+    const values = [title, price, category, image]
     db.query(inserts, values, (err, result) => 
     {
         if(err)
