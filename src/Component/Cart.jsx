@@ -1,6 +1,7 @@
 import React, {useState, useEffect}from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
+import { Underline } from 'lucide-react'
 
 
 
@@ -51,7 +52,7 @@ function Cart()
    
     return(
         <>
-            <Navbar/>
+               <Navbar products={undefined} setProducts={undefined} Control={undefined} lists={Underline}/>
             <div>
                 <div className="relative flex items-center justify-center">
                     <h1 className="font-bold pt-12 text-6xl font-serif pr-40 text-cyan-600 underline   w-screen">Cart</h1>

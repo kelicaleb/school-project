@@ -10,11 +10,7 @@ function Male({id, male}) {
   const [showRightButton, setShowRightButton] = useState(true);
 
 
-  useEffect(() => 
-{
-    console.log("This is the male array", male)
 
-},[])
   const handleMaleCart = async (checkid) => 
     {
       const selectedItem = male.find((data) => 

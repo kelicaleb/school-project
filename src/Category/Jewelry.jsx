@@ -8,11 +8,7 @@ function Jewelry({id, jewelry }) {
   const [showRightButton, setShowRightButton] = useState(true);
 
 
-  useEffect(() => 
-{
-    console.log("This is the jewelry", jewelry)
 
-},[])
 const handleCart = async(id) => 
 {
   const selectedItem = jewelry.find((data) => 
@@ -54,7 +50,7 @@ const handleCart = async(id) =>
   };
 
   return (
-    <div id={id} className="w-screen relative py-4 top-2  ">
+    <div id={id}className="w-full relative py-4 top-2  ">
       <div className="w-[79rem] h-12 bg-cyan-500 rounded-md ">
         <h1 className="font-serif text-white text-center pt-1 font-bold text-2xl">Jewelry</h1>
       </div>
@@ -75,7 +71,7 @@ const handleCart = async(id) =>
         >
           {jewelry.map((item) => (
             <div 
-              key={item.cartId}
+              key={item.productId}
               className={`hover:-translate-y-1 flex-shrink-0 w-64 h-[21rem]  rounded-md shadow-xl shadow-cyan-500 hover:shadow-cyan-400 items-center justify-center snap-start pl-10`}
             >
               <img className="h-[15rem] w-[12rem]"src={`http://localhost:8000${item.image}`}  />

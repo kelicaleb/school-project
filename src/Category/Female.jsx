@@ -8,11 +8,7 @@ function Female({id, female}) {
   const [showRightButton, setShowRightButton] = useState(true);
 
 
-  useEffect(() => 
-{
-    console.log("This is the female array", female)
 
-},[female])
 const handleCart  = async(id) =>
 {
   console.log(id)

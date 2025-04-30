@@ -3,10 +3,11 @@ import { FaOpencart } from "react-icons/fa";
 import { FaSmile } from "react-icons/fa";
 import axios from 'axios'
 import { MdSunny } from "react-icons/md";
-import { FaMoon } from "react-icons/fa";
+import { FaMoon } from "react-icons/fa"
+import {useLocation  } from 'react-router-dom'
 
 
-function Navbar()
+function Navbar({products, setProducts, Control, lists})
 {
     const [menu, setMenu ] = useState(false)
     const [customer, setCustomer ] = useState([])
@@ -19,6 +20,14 @@ function Navbar()
     const [data, setData ] = useState([])
     const [list, setList] = useState([])
     const [ control, setControl ]= useState(true)
+    const [choose, setChoose ] = useState(false)
+    const [prod, setProd ] = useState()
+
+    const location = useLocation() 
+
+
+
+    console.log("locatin from navbar", location.pathname)
     
     const handleMenuButton = () => 
     {
@@ -29,7 +38,7 @@ function Navbar()
     {
       const fetchData = async () => 
       {
-        await axios.get("https://fakestoreapi.com/products")
+        await axios.get("http://localhost:8000/Products/api/products")
         .then((res) => setData(res.data) )
         
        
@@ -38,19 +47,7 @@ function Navbar()
     },[search])
    
    
-    useEffect(() =>
-    {
-     const fetchData = async () => 
-     {
-     await axios.get("http://localhost:8000/customer")
-      .then((res) => setCustomer(res.data) )
-
-     }
-     fetchData()
-     localStorage.setItem("Mode", darkMode)
-     const savedTheme = localStorage.getItem("Mode")
-   
-    },[darkMode])
+  
 
     useEffect(() => 
     {
@@ -67,23 +64,7 @@ function Navbar()
       }
       fetchData() 
     }, [login.length])
-    const handleDarkMode = () => 
-    {
-      setMode(!mode)
-      if(mode){
-         setDarkMode('light')
-         return  localStorage.setItem('Mode', darkMode)
 
-      } 
-      else
-      {
-        setDarkMode('dark')
-        return  localStorage.setItem('Mode', darkMode)
-
-
-      } 
-    
-    }
     useEffect(() => 
     {
     
@@ -100,19 +81,49 @@ function Navbar()
     const handleInput = (value) => 
     {
       setInput(value)
-    
+      setChoose(true)
+
     
     }
+    const handleClick = () => 
+    {
+
+      if(location.pathname !== "/schoolProducts")
+        {
+          return window.location.href = "schoolProducts"
+        }
+        else{
+          setProd(list.length)
+        }
+    }
     // search algorithim 
+   
+      
     useEffect(() => 
     {
-      const result = data.filter((data) => 
-      {
-        return data && data.title && data.title.toLowerCase().includes(input)
-      })
-      setList(result)
-      console.log(list)
-    },[input])
+      if(location.pathname == "/schoolProducts")
+        {
+          setProd(products.length)
+  
+        }
+     if(products)
+     {
+      const result = products.filter((data) => 
+        {
+          setChoose(true)
+          return data && data.item && data.item.toLowerCase().includes(input)
+        })
+        setList(result)
+        if(result){
+          lists(result)
+          Control(true)
+
+        }
+     }
+ 
+    
+      
+    },[input, prod])
 
    return(
     <>
@@ -153,7 +164,7 @@ function Navbar()
       </div>
       <div className=" max-h-[8rem]   top-0 z-10 pt-8 mr-[44rem] ">
           <div className="absolute top-0 z-10 mr-[22rem] pt-4" >
-          <input className=" sticky top-0 w-[42rem] text-center font-serif rounded-md h-[2rem] bg-slate-100" type="text"  placeholder="Search..." 
+          <input onClick={handleClick} className=" sticky top-0 w-[42rem] text-center font-serif rounded-md h-[2rem] bg-white/20 text-white placeholder-white" type="text"  placeholder="Search Products..." 
           value={input} onChange={e => handleInput(e.target.value)} />
           </div>
         <div className="absolute max-h-[10rem] overflow-auto  top-[3.2rem] z-10 ">
@@ -190,12 +201,12 @@ function Navbar()
           {/*button dark mode*/}
 
           {
-            mode && <button onClick={handleDarkMode}><MdSunny className="pr-4 text-violet-600 h-10 w-10 " />
+            mode && <button><MdSunny className="pr-4 text-violet-600 h-10 w-10 " />
           </button>
           }
          {/*button light mode*/}
           {
-            !mode && <button onClick={handleDarkMode}><FaMoon className="pr-4 text-cyan-500 h-10 w-10 " />
+            !mode && <button><FaMoon className="pr-4 text-cyan-500 h-10 w-10 " />
             </button>
           }
           </p>

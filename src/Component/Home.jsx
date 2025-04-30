@@ -144,7 +144,7 @@ function Home()
     return(
         <>
             <div className={mode + "relative"}>
-            <Navbar/>
+            <Navbar products={undefined} setProducts={undefined} Control={undefined} lists={undefined}/>
             <div className="pl-2">
            <h1 className="pb-4 text-center pt-8 font-serif underline text-5xl text-cyan-600 font-semibold dark:text-violet-600">Home Page</h1>
             <div className="w-[78rem] bg-cyan-600 h-12 pt-2  rounded-md dark:bg-violet-600 ">

@@ -112,7 +112,7 @@ function Purchase()
                         <div className="relative flex pt-6 items-center justify-center "> 
                         <img className="h-[5em] w-16" src={`http://localhost:8000${data.images}`}/>
                         </div>
-                        <p  className="text-white font-semibold"> $Price {data.price}</p>
+                        <p  className="text-white font-semibold"> KES:{data.price}</p>
                         <div>
                             <p className="font-serif font-semibold text-white pr-[16rem] pt-2">Amount:</p>
                             <div className="pr-2 pt-2">
