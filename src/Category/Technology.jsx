@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ToastContainer, toast } from 'react-toastify';
+import axios from 'axios'
+
 
 function Technology({id, technology}) {
   const scrollContainerRef = useRef(null);
@@ -33,9 +36,35 @@ function Technology({id, technology}) {
     }
   };
 
+  const handleTechnologyCart = async (id) =>
+  {
+    const selectedItem = technology.find((data) =>
+    {
+      return data.productId === id
+    })
+    if(selectedItem){
+     try{
+      await axios.post("http://localhost:8000/cart", 
+        {
+          title:"Technology", 
+          price:selectedItem.price, 
+          category:selectedItem.category, 
+          image:selectedItem.image
+        }
+      )
+      .then((res) => console.log(res))
+      return toast.success("Added to Cart")
+     }
+     catch(err){
+      return toast.error("Error adding to cart")
+     }
+    }
+  }
+
   return (
-    <div id={id} className="w-full relative py-8 top-12 pr-2 ">
-      <div className="w-[75rem] h-12 bg-cyan-500 rounded-md ">
+    <div id={id} className="w-full relative py-8 top-10 pr-2 ">
+             <ToastContainer/>
+      <div className="w-[79rem] h-12 bg-cyan-500 rounded-md ">
         <h1 className="font-serif text-white text-center pt-1 font-bold text-2xl">Technology</h1>
       </div>
       <div className="relative">
@@ -50,15 +79,20 @@ function Technology({id, technology}) {
         
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto gap-4   scrollbar-hide snap-x"
+          className="flex overflow-x-auto gap-12   scrollbar-hide snap-x h-[26rem] pt-4"
           onScroll={handleScroll}
         >
           {technology.map((item) => (
             <div 
-              key={item.cartId}
-              className={`flex-shrink-0 w-64 h-64  rounded-lg flex items-center justify-center snap-start`}
+              key={item.productId}
+              className={`flex-shrink-0 hover:-translate-y-1 pl-4 w-[17rem] h-[21rem] shadow-xl shadow-cyan-600 hover:shadow-cyan-500  rounded-md items-center justify-center snap-start`}
             >
-              <img className="h-[15rem] w-[15rem]"src={`http://localhost:8000${item.image}`}  />
+              <img className="h-[15rem] w-[15rem]"src={`http://localhost:8000${item.image}`}  />     
+              <p className="text-sm font-serif">{item.item}</p>
+              <p className="font-bold fontserif">KES:{item.price}</p>
+              <div>
+                <button onClick={() => handleTechnologyCart(item.productId)} className="font-serif text-white bg-cyan-600 hover:bg-cyan-500 h-9 w-[10rem] rounded-md">Add To Cart</button>
+              </div>
               </div>
           ))}
         </div>

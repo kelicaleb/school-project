@@ -72,7 +72,7 @@ function Product()
 return(
     <>
     <Navbar/>
-    <a href="#male" className="text-cyan-500 pt-[22rem] text-5xl">Press me</a>
+    <h1 className="font-serif font-bold pt-12 text-4xl text-cyan-600 underline">Products</h1>
     <Female id="female" female={femaleClothes}/>
     <Jewelry id="jewelry" jewelry={jewelry}/> 
     < Male id="male"  male={maleClothes}/>

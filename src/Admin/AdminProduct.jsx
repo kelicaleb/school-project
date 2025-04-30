@@ -10,12 +10,13 @@ const AdminProduct = () => {
   const [category, setCategory] = useState('maleClothes');
   const [stock, setStock] = useState('');
   const [image, setImage] = useState(null);
-  const [height, setHeight ] = useState("33rem")
+  const [height, setHeight ] = useState("37rem")
   const [notification, setNotification ] = useState()
   const [success, setSucess]= useState("")
   const [icon, setIcon ] = useState()
   const [tick, setTick ] = useState(0)
   const [start, setStart ] = useState(false)
+  const [price, setPrice ]  = useState(0)
 
 
   const clock = () => 
@@ -59,6 +60,7 @@ const AdminProduct = () => {
     formData.append('category', category);
     formData.append('stock', stock);
     formData.append('image', image);
+    formData.append('price', price)
 
     try {
       const response = await axios.post('http://localhost:8000/Products/api/products', formData, {
@@ -68,7 +70,7 @@ const AdminProduct = () => {
       });
 
       if (response.data.success) {
-        setHeight("34rem")
+        setHeight("38rem")
         setSucess("Successfully sent")
         setNotification(true)
         setIcon(<TiTick className="text-green"/>)
@@ -81,7 +83,7 @@ const AdminProduct = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-      setHeight("34rem")
+      setHeight("38rem")
       setNotification(false)
       setIcon(<FaMixer/>)
       setSucess("Failed to post")
@@ -94,7 +96,7 @@ const AdminProduct = () => {
   return (
     <>
     <AdminNavbar />
-    <div className="items-center justify-center bg-gradient-to-br from-cyan-500 to-cyan-700 h-screen w-screen absolute bg-no-repeat inset-0 ">
+    <div className="items-center justify-center bg-gradient-to-br from-cyan-500 to-cyan-700 h-[60rem] w-screen absolute bg-no-repeat inset-0 ">
       <div className="relative flex items-center justify-center top-[5rem] rounded-md">
         <div className="bg-white/30  w-[33rem] rounded-md" style={{height:height}}>
         <h1 className="font-serif font-bold text-white pt-2 text-xl">Add New Product</h1>
@@ -161,6 +163,15 @@ const AdminProduct = () => {
             onChange={handleFileChange}
             required />
           </div>
+        </div>
+        <div>
+          <p className="font-serif font-semibold pt-2 pr-[27rem] text-white">Price:</p>
+          <input type="number"
+          className="bg-white/40 w-[30rem] h-9 placeholder-white rounded-md text-center"
+          placeholder="Price"
+          value={price}
+          onChange={e => setPrice(e.target.value)}
+          />
         </div>
         <div className="pt-4">
         <button className="h-9 w-[30rem] text-white bg-cyan-600 rounded-md hover:bg-cyan-500" type="submit">Add Product</button>

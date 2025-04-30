@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function Male({id, male}) {
   const scrollContainerRef = useRef(null);
@@ -12,6 +15,37 @@ function Male({id, male}) {
     console.log("This is the male array", male)
 
 },[])
+  const handleMaleCart = async (checkid) => 
+    {
+      const selectedItem = male.find((data) => 
+      {
+        return data.productId === checkid
+      })
+     console.log(selectedItem)
+     if (selectedItem) 
+     {
+      try{
+        await axios.post("http://localhost:8000/cart", 
+          {
+            title:"Male Clothes", 
+            price:selectedItem.price, 
+            category:selectedItem.category, 
+            image:selectedItem.image
+          }
+        )
+        .then((res) => console.log(res))
+        toast.success(`${selectedItem.item} Added to cart`)
+
+      }
+      catch(err)
+      {
+        console.log("Error posting data")
+        return toast.error("Error adding to cart")
+      }
+     }
+
+
+    } 
 
   const handleScroll = () => {
     if (scrollContainerRef.current) {
@@ -34,8 +68,9 @@ function Male({id, male}) {
   };
 
   return (
-    <div id={id} className="w-full relative py-8 top-12 pr-2 ">
-      <div className="w-[75rem] h-12 bg-cyan-500 rounded-md ">
+    <div id={id} className="w-full relative py-8 top-0 pr-2 ">
+       <ToastContainer/>
+      <div className="w-[79rem] h-12 bg-cyan-500 rounded-md ">
         <h1 className="font-serif text-white text-center pt-1 font-bold text-2xl">Male Clothes</h1>
       </div>
       <div className="relative">
@@ -50,15 +85,26 @@ function Male({id, male}) {
         
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto gap-10   scrollbar-hide snap-x"
+          className="flex overflow-x-auto gap-12    scrollbar-hide snap-x h-[21rem]"
           onScroll={handleScroll}
         >
           {male.map((item) => (
             <div 
-              key={item.cartId}
-              className={`flex-shrink-0 w-64 h-64  rounded-lg flex items-center justify-center snap-start`}
+              key={item.productId}
+              className={`flex-shrink-0 w-64 h-[20rem]  rounded-md shadow-xl shadow-cyan-600 hover:shadow-cyan-500  relative pl-8 hover:-translate-y-1  pt-3 items-center justify-center snap-start`}
             >
-              <img className="h-[12rem] w-[12rem]"src={`http://localhost:8000${item.image}`}  />
+              <img className="h-[13rem] w-[13rem]"src={`http://localhost:8000${item.image}`}  />
+              <div className="pt-1">
+              <p className="text-sm font-serif">{item.item}</p>
+                <p className="font-serif font-semibold">
+                  KES:{item.price}
+                </p>
+              </div>
+              <div className="pr-2">
+                <button onClick={() => handleMaleCart(item.productId)} 
+                className="bg-cyan-600 hover:bg-cyan-500 text-white w-[12rem] h-9 rounded-md">
+                  Add To Cart</button> 
+              </div>
               </div>
           ))}
         </div>

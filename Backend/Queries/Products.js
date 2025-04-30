@@ -86,7 +86,7 @@ const Products = () => {
     // Middleware for handling product creation with image upload
     goods.post('/api/products', upload.single('image'), async (req, res) => {
         try {
-            const { serialNumber, item, category, stock } = req.body;
+            const { serialNumber, item, category, stock, price } = req.body;
             
             // Generate the URL for the uploaded image
             const imageUrl = req.file ? `/uploads/products/${req.file.filename}` : null;
@@ -97,7 +97,8 @@ const Products = () => {
                 item: item,
                 image: imageUrl,
                 category: category,
-                stock: stock
+                stock: stock,
+                price: price
             });
 
             // Send success response with product details

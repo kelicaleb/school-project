@@ -71,6 +71,7 @@ function Register()
         }
         catch{ 
             console.log("error posting")
+            toast.error("Error regestering")
         }
       
     }

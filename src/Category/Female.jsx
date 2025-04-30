@@ -52,8 +52,8 @@ const handleCart  = async(id) =>
   };
 
   return (
-    <div id={id}className="w-full relative py-8 top-12 pr-2 ">
-      <div className="w-[75rem] h-12 bg-cyan-500 rounded-md  ">
+    <div id={id}className="w-full relative py-8 top-19 pr-2 ">
+      <div className="w-[79rem] h-12 bg-cyan-500 rounded-md  ">
         <h1 className="font-serif text-white text-center pt-1 font-bold text-2xl">Female Clothes</h1>
       </div>
       <div className="relative">
@@ -73,13 +73,14 @@ const handleCart  = async(id) =>
         >
           {female.map((item) => (
             <>
-            <div className="items-center justify-center pt-10 h-[22rem]">
+            <div className="items-center justify-center pt-10 h-[23rem]">
             <div
               key={item.productId}
-              className={`shadow-xl shadow-cyan-500 hover:shadow-cyan-400 hover:-translate-y-1 flex-shrink-0 w-64 h-[18rem]  rounded-lg  items-center justify-center snap-start`}
+              className={`shadow-xl shadow-cyan-500 hover:shadow-cyan-400 hover:-translate-y-1 flex-shrink-0 w-64 h-[19rem]  rounded-lg  items-center justify-center snap-start`}
             >
               <img className="h-[12rem] w-[13rem] pl-4" src={`http://localhost:8000${item.image} `} />
-              <p className="fonr-serif font-semibold">Price: Khs {item.price}</p>
+              <p className="text-sm font-serif">{item.item}</p>
+              <p className="fonr-serif font-semibold">KES: {item.price}</p>
               <div className="pt-4 items-cneter justify-center pr-2">
                 <button onClick={() => handleCart(item.productId)} className="bg-cyan-600 h-9 hover:bg-cyan-500 w-[11rem] rounded-md text-white">Add Cart</button>
               </div> 

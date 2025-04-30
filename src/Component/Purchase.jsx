@@ -47,6 +47,7 @@ function Purchase()
         {
             await axios.get("http://localhost:8000/purchase")
             .then((res) => setData(res.data))
+            console.log(data)
 
             await axios.get("http://localhost:8000/purchase")
             .then((res) => setPurchase(res.data))
@@ -76,7 +77,7 @@ function Purchase()
             {
                 customerId:parseInt(localStorage.getItem("customerId")),
                 amount:total,
-                item:data.title.slice(0,19), 
+                item:data.title, 
                 method:method
 
                 
@@ -109,7 +110,7 @@ function Purchase()
                 <div>
                     <form onSubmit={handleSubmit}> 
                         <div className="relative flex pt-6 items-center justify-center "> 
-                        <img className="h-[5em] w-16" src={data.images}/>
+                        <img className="h-[5em] w-16" src={`http://localhost:8000${data.images}`}/>
                         </div>
                         <p  className="text-white font-semibold"> $Price {data.price}</p>
                         <div>
