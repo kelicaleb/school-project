@@ -1,6 +1,5 @@
 import React, { useState, useEffect  } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Help from './Fillins/Help'
 import './App.css'
 import Home from './Component/Home'
 import Product from "./Component/Product"
@@ -15,8 +14,6 @@ import axios from 'axios'
 import Admin from './Admin/AdminLogin'
 import AdminHome from './Admin/AdminHome'
 import AdminProducts from './Admin/AdminProduct'
-import Male from './Category/Male'
-
 // Create a wrapper component that uses useLocation
 function AppContent() {
 
@@ -29,6 +26,8 @@ function AppContent() {
   //deleting data on purchase of not purchasing 
   useEffect(() => 
   {
+   
+    
     const fetchData  = async () => 
     {
       await axios.get("http://localhost:8000/purchase")
@@ -70,24 +69,17 @@ function AppContent() {
         <Route path="/Admin" element={<Admin/>}/>
         <Route path="/AdminHome" element={<AdminHome/>}/>
         <Route path="/AdminProducts"  element={<AdminProducts/>}/>
-      </Routes>
-    </div>
+        <Route path="?Help" element={<Help/>}/>
+      </Routes>    </div>
   )
 }
 
 // Main App component
 function App() {
-  let Component;
-  switch(window.location.pathname)
-  {
-    case"school-project/schoolProducts":
-    Component = <Product/>
-    break
-  }
+
   return (
     <BrowserRouter basename="/school-project">
       <AppContent />
-      {Component}
     </BrowserRouter>
   )
 }

@@ -216,7 +216,7 @@ function Home()
         </div>
         <div className=" ml-[25rem] h-[15rem] w-[15rem] bg-slate-800 rounded-md">
             <ul className="text-white font-serif  pt-4 font-bold text-[1.2rem]">
-                <l1 className="flex pl-2 hover:text-cyan-500 pt-2 "><HiQuestionMarkCircle className="h-7 w-8" />Help Center</l1>
+                <l1 className="flex pl-2 hover:text-cyan-500 pt-2 "><HiQuestionMarkCircle className="h-7 w-8" /><a href="Help">Help Center</a></l1>
                 <l1 className=" flex pl-2 hover:text-cyan-500 pt-4 "><IoMdFlame className="h-7 w-8" />Top Deals</l1>
                 <l1 className=" flex pl-3 hover:text-cyan-500 pt-5 "><GiHidden className="h-7 w-8" />Exclusive</l1>
             </ul>

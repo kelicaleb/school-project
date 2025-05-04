@@ -13,6 +13,7 @@ import Gmail from './Api/Gmail.js'
 import AdminLogin from './Admin/AdminLogin.js'
 import TableTransaction from './Admin/TableTransaction.js'
 import Products from './Queries/Products.js'
+import HelpSocket from './Sokets/HelpSocket.js'
 
 dotenv.config()
 const port = process.env.PORT
@@ -42,7 +43,8 @@ const tableTransaction = TableTransaction()
 app.use("/tableTransaction", tableTransaction)
 //Producst named goods in the database 
 const products = Products()
-app.use("/Products", products) 
+app.use("/Products", products)
+app.use("/help", HelpSocket())
 
 Parse.initialize("uzFQD9pOim0aPi1ZT4wDPtpcjASCGWSegKWS2LKe","5T1vqYTWNytcXRGndQdEHKFaYfnLgXW6rMKr5q6l"); 
 Parse.serverURL = "https://parseapi.back4app.com/";

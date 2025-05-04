@@ -67,6 +67,7 @@ function Navbar({products, setProducts, Control, lists})
 
     useEffect(() => 
     {
+     
     
       if(input === '')
       {
