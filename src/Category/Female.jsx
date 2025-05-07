@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+
 
 function Female({id, female}) {
   const scrollContainerRef = useRef(null);
@@ -16,14 +18,22 @@ const handleCart  = async(id) =>
   console.log(selectedItem, "This is the selected item")
   if(selectedItem) 
   {
-    await axios.post("http://localhost:8000/cart", 
-      {
-        title:"Female Clothes", 
-        price:selectedItem.price, 
-        category: selectedItem.category, 
-        image:selectedItem.image
-      }
-    )
+    try{
+      await axios.post("http://localhost:8000/cart", 
+        {
+          title:"Female Clothes", 
+          price:selectedItem.price, 
+          category: selectedItem.category, 
+          image:selectedItem.image
+        }
+      )
+      return toast.success("Added to Cart")
+    }
+    catch(err)
+    {
+      toast.error("Failed to push to cart ")
+      return console.log("Female cart erro", err)
+    }
   }
 }
 
@@ -49,6 +59,8 @@ const handleCart  = async(id) =>
 
   return (
     <div id={id}className="w-full relative py-8 top-19 pr-2 ">
+             <ToastContainer/>
+
       <div className="w-[79rem] h-12 bg-cyan-500 rounded-md  ">
         <h1 className="font-serif text-white text-center pt-1 font-bold text-2xl">Female Clothes</h1>
       </div>

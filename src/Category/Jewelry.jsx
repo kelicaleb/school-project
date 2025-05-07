@@ -66,11 +66,13 @@ const handleCart = async(id) =>
         
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto gap-12 scrollbar-hide snap-x pt-8 h-[25rem] "
+          className="flex overflow-x-auto gap-12 scrollbar-hide snap-x pt-8  "
           onScroll={handleScroll}
         >
+          
           {jewelry.map((item) => (
-            <div 
+            <div className="items-center justify-center pt-10 h-[26rem]">
+                 <div 
               key={item.productId}
               className={`hover:-translate-y-1 flex-shrink-0 w-64 h-[21rem]  rounded-md shadow-xl shadow-cyan-500 hover:shadow-cyan-400 items-center justify-center snap-start pl-10`}
             >
@@ -81,6 +83,8 @@ const handleCart = async(id) =>
              <button onClick={() => handleCart(item.productId)} className="bg-cyan-600 hover:bg-cyan-500 text-white w-[12rem] rounded-md h-9">Add Cart</button>
              </div>
               </div>
+              </div>
+           
           ))}
         </div>
         

@@ -81,10 +81,12 @@ function Male({id, male}) {
         
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto gap-12    scrollbar-hide snap-x h-[21rem]"
+          className="flex overflow-x-auto gap-12    scrollbar-hide snap-x "
           onScroll={handleScroll}
         >
           {male.map((item) => (
+          <>
+            <div className="items-center justify-center pt-10 h-[24rem]">
             <div 
               key={item.productId}
               className={`flex-shrink-0 w-64 h-[20rem]  rounded-md shadow-xl shadow-cyan-600 hover:shadow-cyan-500  relative pl-8 hover:-translate-y-1  pt-3 items-center justify-center snap-start`}
@@ -102,6 +104,8 @@ function Male({id, male}) {
                   Add To Cart</button> 
               </div>
               </div>
+          </div>
+          </>
           ))}
         </div>
         

@@ -27,27 +27,15 @@ useEffect(() =>
 
   fetchData()
 },[control])
-useEffect(() => 
-{
-  setControl(!control)
-  const fetchData = async()=> 
-  {
-      await axios.get("http://localhost:8000/Logins")
-      .then((res) => setLogin(res.data))
-
-      login.map((data) => 
-      {
-        setUsername(data.username)
-      })
-  }
-  fetchData()
-},[login.length]) 
+ 
 
 
 
 
 
   useEffect(() => {
+    const getUsername = localStorage.getItem('username')
+    setUsername(getUsername)
     if (messagesContainerRef.current) {
       const container = messagesContainerRef.current;
       const isOverflowing = container.scrollHeight > container.clientHeight;
@@ -68,6 +56,7 @@ useEffect(() =>
   }, [messages]);
   useEffect(() => 
   {
+ 
     socketRef.current = new WebSocket("ws://localhost:3001") 
     socketRef.current.onopen = () => 
     {
@@ -107,11 +96,12 @@ useEffect(() =>
   
   const sendMessage = () => {
     setControl(true)
+  
     if(socketRef.current && input)
     {
       socketRef.current.send(input)
       setMessages(prevMessages => [...prevMessages, {
-        messages: input
+        messages: `${username}: ${input}`
       }]);
       setInput("");
     }
@@ -128,7 +118,7 @@ useEffect(() =>
       >
         {messages.map((msg, i) => (
           <div key={i} className="bg-cyan-100 text-cyan-800 p-2 rounded w-fit max-w-xs font-serif font-semibold">
-            {username}: {msg.messages}
+            {msg.messages}
           </div>
         ))}
         

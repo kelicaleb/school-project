@@ -63,7 +63,7 @@ function Technology({id, technology}) {
 
   return (
     <div id={id} className="w-full relative py-8 top-10 pr-2 ">
-             <ToastContainer/>
+            <ToastContainer/>
       <div className="w-[79rem] h-12 bg-cyan-500 rounded-md ">
         <h1 className="font-serif text-white text-center pt-1 font-bold text-2xl">Technology</h1>
       </div>
@@ -79,21 +79,23 @@ function Technology({id, technology}) {
         
         <div 
           ref={scrollContainerRef}
-          className="flex overflow-x-auto gap-12   scrollbar-hide snap-x h-[26rem] pt-4"
+          className="flex overflow-x-auto gap-12   scrollbar-hide snap-x  pt-4"
           onScroll={handleScroll}
         >
           {technology.map((item) => (
-            <div 
+            <div className="items-center justify-center pt-8 h-[25rem]">
+               <div 
               key={item.productId}
-              className={`flex-shrink-0 hover:-translate-y-1 pl-4 w-[17rem] h-[21rem] shadow-xl shadow-cyan-600 hover:shadow-cyan-500  rounded-md items-center justify-center snap-start`}
+              className={`hover:-translate-y-1 flex-shrink-0 w-64 h-[21rem]  rounded-md shadow-xl shadow-cyan-500 hover:shadow-cyan-400 items-center justify-center snap-start pl-10`}
             >
-              <img className="h-[15rem] w-[15rem]"src={`http://localhost:8000${item.image}`}  />     
+              <img className="h-[15rem] w-[12rem]"src={`http://localhost:8000${item.image}`}  />
               <p className="text-sm font-serif">{item.item}</p>
-              <p className="font-bold fontserif">KES:{item.price}</p>
-              <div>
-                <button onClick={() => handleTechnologyCart(item.productId)} className="font-serif text-white bg-cyan-600 hover:bg-cyan-500 h-9 w-[10rem] rounded-md">Add To Cart</button>
+              <p className="font-bold font-serif">KES:{item.price}</p>
+             <div className="pt-2 pr-5">
+             <button onClick={() => handleCart(item.productId)} className="bg-cyan-600 hover:bg-cyan-500 text-white w-[12rem] rounded-md h-9">Add Cart</button>
+             </div>
               </div>
-              </div>
+            </div>
           ))}
         </div>
         
