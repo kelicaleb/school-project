@@ -90,7 +90,7 @@ function Product()
                 })
                 setTechnology(tech)
                 setFetchData(true)
-                return console.log("Successfully fetched data")
+                return console.log("Data fetched")
               }
             }
             catch(err){
