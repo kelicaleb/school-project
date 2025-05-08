@@ -57,6 +57,7 @@ function Home()
         else{
           setCheckGender(false)
         }
+        localStorage.setItem("gender", data.gender)
         localStorage.setItem("username", data.username)
         setUsername(localStorage.getItem("username"))
         localStorage.setItem("customerId", data.customerId)

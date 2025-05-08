@@ -20,6 +20,7 @@ function Product()
     const [technology, setTechnology ] = useState([])
     const [control, setControl ] = useState(false)
     const [list, setList ] = useState([])
+    const [gender, setGender ] = useState(false)
 
 
 
@@ -31,6 +32,8 @@ function Product()
         const fetchData = async ()=>
         {
             try{
+             
+
               if(!control)
               {
                 await axios.get("http://localhost:8000/Products/api/products")
@@ -42,14 +45,12 @@ function Product()
                     return data && data.category &&  data.category.toLowerCase().includes("female")
                 })
                 setFemaleClothes(womenClothes)
-                console.log("This is the female clothes", femaleClothes)
                 //For Setting male clothes 
                 const menClothes = products.filter((data) => {
                     return data && data.category && data.category.toLowerCase().includes("maleclothes")
                 })
                 console.log("show me the menClothes", menClothes)
                 setMaleClothes(menClothes)
-                console.log("This is the male clothes from products", maleClothes)
                 const jewel = products.filter((data) => {
                     return data && data.category && data.category.toLowerCase().includes("jewelry")
                 })
@@ -66,21 +67,18 @@ function Product()
               else{
                 await axios.get("http://localhost:8000/Products/api/products")
                 .then((res) => setProducts(res.data))
-                console.log("these is products", products)
                 //for setting female products
                 const womenClothes = list.filter((data) => 
                 {
                     return data && data.category &&  data.category.toLowerCase().includes("female")
                 })
                 setFemaleClothes(womenClothes)
-                console.log("This is the female clothes", femaleClothes)
                 //For Setting male clothes 
                 const menClothes = list.filter((data) => {
                     return data && data.category && data.category.toLowerCase().includes("maleclothes")
                 })
                 console.log("show me the menClothes", menClothes)
                 setMaleClothes(menClothes)
-                console.log("This is the male clothes from products", maleClothes)
                 const jewel = list.filter((data) => {
                     return data && data.category && data.category.toLowerCase().includes("jewelry")
                 })
@@ -101,7 +99,7 @@ function Product()
         }
         fetchData()
     
-    },[list, products.length])
+    },[list, products.length, gender])
     useEffect(() => {
         if (location.hash) {
           const id = location.hash.replace("#", "");
@@ -111,28 +109,66 @@ function Product()
           }
         }
       });
+
+      useEffect(() => 
+    {
+        const gender = localStorage.getItem("gender")
+        console.log("This is the stored gender", gender)
+        if(gender === "Male")
+        {
+            return setGender(true)
+        }
+        else{
+            return setGender(false)
+        }
+    },[gender])
+
+
   
 return(
     <>
 {
-    !control && 
+    !control && gender &&
     <>
-    <Navbar products={products} setProducts={setProducts} Control={setControl} lists={setList}/>
+    <Navbar products={products} setProducts={setProducts} Control={setControl} lists={setList} />
     <h1 className="font-serif font-bold pt-12 text-4xl text-cyan-600 underline">Products</h1>
-    <Female id="female" female={femaleClothes} />
-    <Jewelry id="jewelry" jewelry={jewelry} />
     <Male id="male" male={maleClothes} />
-    <Technology id="technology" technology={technology} /></>
+    <Technology id="technology" technology={technology} />
+    <Jewelry id="jewelry" jewelry={jewelry} />
+    <Female id="female" female={femaleClothes} />
+    </>
 }
 {
-    control && 
+    control && gender &&
+    <>
+    <Navbar  products={products} setProducts={setProducts} Control={setControl} lists={setList}/>
+    <h1 className="font-serif font-bold pt-12 text-4xl text-cyan-600 underline">Products</h1>
+    < Male id="male"  male={maleClothes}/>
+    <Technology id="technology" technology={technology}/>
+    <Jewelry id="jewelry" jewelry={jewelry}/> 
+    <Female id="female" female={femaleClothes}/>
+    </>
+}
+{
+    !control && !gender &&
+    <>
+    <Navbar  products={products} setProducts={setProducts} Control={setControl} lists={setList}/>
+    <h1 className="font-serif font-bold pt-12 text-4xl text-cyan-600 underline">Products</h1>
+    <Female id="female" female={femaleClothes}/>
+    <Jewelry id="jewelry" jewelry={jewelry}/>
+    <Technology id="technology" technology={technology}/> 
+    < Male id="male"  male={maleClothes}/>
+    </>
+}
+{
+    control && !gender &&
     <>
     <Navbar  products={products} setProducts={setProducts} Control={setControl} lists={setList}/>
     <h1 className="font-serif font-bold pt-12 text-4xl text-cyan-600 underline">Products</h1>
     <Female id="female" female={femaleClothes}/>
     <Jewelry id="jewelry" jewelry={jewelry}/> 
-    < Male id="male"  male={maleClothes}/>
     <Technology id="technology" technology={technology}/>
+    <Male id="male"  male={maleClothes}/>
     </>
 }
     </>
