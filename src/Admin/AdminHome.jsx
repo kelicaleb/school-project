@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect } from 'react'
 import AdminNavbar from './AdminNavbar'
 import { BarChart } from '@mui/x-charts/BarChart';
 import { LineChart } from '@mui/x-charts/LineChart';
@@ -9,6 +9,14 @@ import Transactions from './Transactions'
 
 
 function AdminHome(){
+
+  useEffect(() => 
+  {
+    
+  },[])
+
+
+
     //data Pie chart 
     const data = [
         { label: 'Group A', value: 400, color: '#0088FE' },

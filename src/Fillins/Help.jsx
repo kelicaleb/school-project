@@ -99,7 +99,7 @@ useEffect(() =>
   
     if(socketRef.current && input)
     {
-      socketRef.current.send(input)
+      socketRef.current.send(`${username}: ${input}`)
       setMessages(prevMessages => [...prevMessages, {
         messages: `${username}: ${input}`
       }]);

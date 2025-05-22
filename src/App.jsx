@@ -14,6 +14,7 @@ import axios from 'axios'
 import Admin from './Admin/AdminLogin'
 import AdminHome from './Admin/AdminHome'
 import AdminProducts from './Admin/AdminProduct'
+import AdminService from './Admin/AdminService'
 // Create a wrapper component that uses useLocation
 function AppContent() {
 
@@ -70,6 +71,7 @@ function AppContent() {
         <Route path="/AdminHome" element={<AdminHome/>}/>
         <Route path="/AdminProducts"  element={<AdminProducts/>}/>
         <Route path="?Help" element={<Help/>}/>
+        <Route path='/services' element={<AdminService/>}/>  
       </Routes>    </div>
   )
 }

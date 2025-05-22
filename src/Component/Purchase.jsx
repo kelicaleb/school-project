@@ -19,6 +19,13 @@ function Purchase()
 
 
 
+    useEffect(() => 
+    {
+        localStorage.setItem("amount", amount)
+    }, [amount])
+
+
+
 
     useEffect(() => 
         {
