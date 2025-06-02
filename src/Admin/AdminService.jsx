@@ -1,17 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef  } from 'react';
 import AdminNavbar from './AdminNavbar';
 import { FiSend } from 'react-icons/fi';
+import axios from 'axios';
 
 function AdminService() {
     const [height, setHeight] = useState('7rem');
     const [input, setInput ] = useState('')
     const [message, setMessage ] = useState([])
-
-    const sendMessage = () => 
+    const socketRef  = useRef(null)
+    useEffect(() => 
     {
-        setMessage(prevMessage => [...prevMessage , { message: input}])
-        setHeight('auto')
-    }
+        const fetchData = async() => 
+        {
+            await axios.get("http://localhost:8000/help/gets")
+            .then((res) => setMessage(res.data))
+            console.log("This is the data", message)
+            setHeight("auto")
+         
+
+          
+        }
+        fetchData()
+    },[message.length])
+    useEffect(() => {
+        const connectWebSocket = () => {
+            socketRef.current = new WebSocket("ws://localhost:3001");
+    
+            socketRef.current.onopen = () => {
+              console.log("Connected to socket successfully");
+            };
+    
+            socketRef.current.onmessage = (event) => {
+              console.log("Received message:", event.data);
+              setMessage((prevMessage) => [
+                ...prevMessage,
+                { messages: event.data },
+              ]);
+            };
+    
+            socketRef.current.onclose = () => {
+              console.log("WebSocket closed. Attempting to reconnect...");
+              setTimeout(() => {
+                connectWebSocket();
+              }, 2000); // Reconnect after 3 seconds
+            };
+    
+            socketRef.current.onerror = (error) => {
+              console.error("WebSocket error:", error);
+            };
+          };
+    
+          connectWebSocket();
+    }, [])
+    
+
+
+
+    const sendMessage = async() => {
+     await axios.post("http://localhost:8000/help/posts",
+         { messages: `Admin: ${input}` })
+     .then((res) => console.log(res.data))
+        setInput('')
+
+      };
+    
 
 
     return (
@@ -26,8 +78,8 @@ function AdminService() {
                             message.map(data => 
                                 <>
                                <div className="pt-2 pb-9">
-                               <div className="bg-white/70 w-[12rem] h-8 rounded-md pb-2 ">
-                                <h1>{data.message}</h1>
+                               <div className="bg-white/70 w-[17rem] h-auto rounded-md pb-2 ">
+                                <h1>{data.messages}</h1>
                                 </div>
                                </div>
                                 </>

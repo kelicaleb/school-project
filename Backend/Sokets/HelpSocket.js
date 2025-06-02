@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import http from 'http'
 import { WebSocketServer } from 'ws'
 import { Sequelize, DataTypes } from 'sequelize'
+import cors from 'cors'
 
 
 
@@ -16,6 +17,7 @@ function HelpSocket()
     const port = process.env.SOCKET
     help.use(express.json())
     console.log("this is  the socket server", port )
+    help.use(cors())
     
 
     const sequelize = new Sequelize("Products", "root", "password", 
@@ -54,9 +56,6 @@ function HelpSocket()
         ws.on("message", async(messages) => 
         {
             console.log("The message passed is", messages.toString())
-            const insertMessage = await Help.create({
-                messages
-            })
             return console.log(insertMessage)
             
         })
@@ -82,13 +81,7 @@ function HelpSocket()
             const inserts = await Help.create({
                 messages
             })
-
-
-
-
-
             return res.status(200).json({ success:true, message:inserts})
-
         }
         catch(err)
         {
