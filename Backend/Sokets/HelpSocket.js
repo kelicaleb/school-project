@@ -56,7 +56,16 @@ function HelpSocket()
         ws.on("message", async(messages) => 
         {
             console.log("The message passed is", messages.toString())
-            return console.log(insertMessage)
+            try{
+                const inserts = await Help.create({
+                    messages: messages.toString()
+                })
+                console.log("Message inserted successfully", inserts)
+            }
+            catch(err)
+            {
+                console.log("An error occured while inserting message", err)
+            }
             
         })
         ws.on("close", (message) => 
@@ -73,7 +82,6 @@ function HelpSocket()
                 if(client.readyState === 1)
                 {
                     client.send(messages)
-                    
                 }
             })
             console.log("Message:", messages)

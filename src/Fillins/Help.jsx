@@ -12,15 +12,17 @@ function Help() {
 
   // Fetch data from the database
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("http://localhost:8000/help/gets");
-        setMessages(res.data);
-      } catch (err) {
-        console.error("Error fetching messages:", err);
+    const fetchData = async () => 
+    {
+      try{ 
+        await axios.get("http://localhost:8000/help/gets")
+        .then((res) => setMessages(res.data))
       }
-    };
-
+      catch(err){
+        return  console.error("Error fetching data:", err);
+      }
+    }
+ 
     fetchData();
   }, [messages.length]); // Runs only once when the component mounts
 
@@ -67,13 +69,9 @@ function Help() {
 
     socketRef.current.onclose = (message) => {
       console.log("WebSocket closed:", message);
-      setTimeout(() => 
-      {
-        connectWebsocket()
-      },2000)
     };
 
-  },[]); // Runs only once when the component mounts
+  },[messages.length]); // Runs only once when the component mounts
 
   // Handle input change
   const handleInput = (e) => {
@@ -84,12 +82,12 @@ function Help() {
   const sendMessage = async () => 
   {
     const username = localStorage.getItem("username")
-    console.log("this is the username", username)
-    await axios.post("http://localhost:8000/help/posts", {
-      messages: `${username}: ${input}`
-    })
-    .then((res) => console.log(res.data))
-    setInput('')
+    await axios.post("http://localhost:8000/help/posts",
+       { messages: `${username}: ${input} `})
+       . then((res) => console.log("Message sent", res.data))
+
+       setMessages((prevMessages) => [...prevMessages, { messages: `${username}: ${input}` }]); 
+       setInput("");
   }
 
   return (
@@ -123,7 +121,7 @@ function Help() {
         />
         <button
           onClick={sendMessage}
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 text-cyan-600 hover:text-cyan-500 hover:text-cyan-800 transition-colors 
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 text-cyan-600 hover:text-cyan-800 transition-colors 
           bg-transparent border-none cursor-pointer p-1 font-bold"
         >
           <FiSend size={30} />

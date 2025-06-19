@@ -4,7 +4,7 @@ import { FiSend } from 'react-icons/fi';
 import axios from 'axios';
 
 function AdminService() {
-    const [height, setHeight] = useState('7rem');
+    const [height, setHeight] = useState('12rem');
     const [input, setInput ] = useState('')
     const [message, setMessage ] = useState([])
     const socketRef  = useRef(null)
@@ -14,10 +14,7 @@ function AdminService() {
         {
             await axios.get("http://localhost:8000/help/gets")
             .then((res) => setMessage(res.data))
-            console.log("This is the data", message)
-            setHeight("auto")
-         
-
+            .catch((err) => console.error("Erorr fetching data", err))
           
         }
         fetchData()
@@ -40,9 +37,6 @@ function AdminService() {
     
             socketRef.current.onclose = () => {
               console.log("WebSocket closed. Attempting to reconnect...");
-              setTimeout(() => {
-                connectWebSocket();
-              }, 2000); // Reconnect after 3 seconds
             };
     
             socketRef.current.onerror = (error) => {
@@ -51,18 +45,18 @@ function AdminService() {
           };
     
           connectWebSocket();
-    }, [])
+    }, [message.length])
     
 
 
 
     const sendMessage = async() => {
-     await axios.post("http://localhost:8000/help/posts",
-         { messages: `Admin: ${input}` })
-     .then((res) => console.log(res.data))
-        setInput('')
-
-      };
+     await axios.post("http://localhost:8000/help/posts", { messages: input })
+     .then((res) => console.log("Message sent" , res.data))
+     setMessage((prevMessage) => [...prevMessage, { message: input}])
+     setInput("")
+     setHeight('auto')
+    };
     
 
 
@@ -73,7 +67,7 @@ function AdminService() {
             <div className="bg-cover absolute inset-0 bg-no-repeat bg-center 
             h-screen w-screen bg-gradient-to-br from-cyan-500 via-sky-500 to-blue-500">
                 <div className="pt-[8rem] relative flex items-center justify-center">
-                    <div className="bg-white/60 w-[70rem] rounded-md pt-2 pl-2  " style={{ height: height }}>
+                    <div className="bg-white/60 w-[70rem] rounded-md pt-2 pl-2  max-h-[25rem] overflow-y-auto " style={{ height: height }}>
                         {
                             message.map(data => 
                                 <>
@@ -97,7 +91,7 @@ function AdminService() {
                         />
                         <button
                             onClick={sendMessage}
-                            className="absolute right-[8rem] top-1/2 transform -translate-y-1/2 text-purple-600 hover:text-cyan-500 hover:text-cyan-800 transition-colors 
+                            className="absolute right-[8rem] top-1/2 transform -translate-y-1/2 text-purple-600 hover:text-cyan-500 transition-colors 
                             bg-transparent border-none cursor-pointer p-1 font-bold"
                         >
                             <FiSend size={29} />
